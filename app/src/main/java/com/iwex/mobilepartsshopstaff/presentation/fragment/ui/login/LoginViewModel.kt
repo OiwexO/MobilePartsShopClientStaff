@@ -4,10 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import android.util.Patterns
+import com.iwex.mobilepartsshopstaff.R
 import com.iwex.mobilepartsshopstaff.presentation.fragment.data.LoginRepository
 import com.iwex.mobilepartsshopstaff.presentation.fragment.data.Result
-
-import com.iwex.mobilepartsshopstaff.presentation.fragment.R
 
 class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
 

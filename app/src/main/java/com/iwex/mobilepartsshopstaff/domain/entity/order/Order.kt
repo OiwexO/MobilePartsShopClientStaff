@@ -1,6 +1,6 @@
-package com.iwex.mobilepartsshopstaff.domain.model.order
+package com.iwex.mobilepartsshopstaff.domain.entity.order
 
-import com.iwex.mobilepartsshopstaff.domain.model.user.Address
+import com.iwex.mobilepartsshopstaff.domain.entity.user.Address
 import java.util.Date
 
 data class Order(
@@ -11,5 +11,5 @@ data class Order(
     val date: Date,
     val customerId: Long,
     val staffId: Long,
-    val shippingAddress: Address
+    val shippingAddress: Address,
 )

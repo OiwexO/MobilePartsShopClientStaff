@@ -1,4 +1,4 @@
-package com.iwex.mobilepartsshopstaff.domain.model.part
+package com.iwex.mobilepartsshopstaff.domain.entity.part
 
 data class Part(
     val id: Long,
@@ -10,5 +10,5 @@ data class Part(
     val manufacturer: Manufacturer,
     val deviceType: DeviceType,
     val partType: PartType,
-    val imageUrl: String
+    val imageUrl: String,
 )

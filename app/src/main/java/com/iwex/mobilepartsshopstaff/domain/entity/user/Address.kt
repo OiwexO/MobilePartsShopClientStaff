@@ -1,4 +1,4 @@
-package com.iwex.mobilepartsshopstaff.domain.model.user
+package com.iwex.mobilepartsshopstaff.domain.entity.user
 
 data class Address(
     val id: Long,
@@ -7,5 +7,5 @@ data class Address(
     val state: String,
     val city: String,
     val street: String,
-    val buildingNumber: String
+    val buildingNumber: String,
 )
