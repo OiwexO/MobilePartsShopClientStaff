@@ -1,4 +1,4 @@
-package com.iwex.mobilepartsshopstaff.domain.entity.part
+package com.iwex.mobilepartsshopstaff.domain.entity.part.device_type
 
 data class DeviceType(
     val id: Long,

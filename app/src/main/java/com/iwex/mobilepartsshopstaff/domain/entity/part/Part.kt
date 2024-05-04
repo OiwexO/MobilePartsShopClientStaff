@@ -1,5 +1,9 @@
 package com.iwex.mobilepartsshopstaff.domain.entity.part
 
+import com.iwex.mobilepartsshopstaff.domain.entity.part.device_type.DeviceType
+import com.iwex.mobilepartsshopstaff.domain.entity.part.manufacturer.Manufacturer
+import com.iwex.mobilepartsshopstaff.domain.entity.part.part_type.PartType
+
 data class Part(
     val id: Long,
     val price: Double,

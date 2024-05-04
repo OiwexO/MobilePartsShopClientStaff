@@ -1,4 +1,4 @@
-package com.iwex.mobilepartsshopstaff.domain.entity.part
+package com.iwex.mobilepartsshopstaff.domain.entity.part.manufacturer
 
 data class Manufacturer(
     val id: Long,

@@ -1,4 +1,4 @@
-package com.iwex.mobilepartsshopstaff.domain.entity.user
+package com.iwex.mobilepartsshopstaff.domain.entity.authentication
 
 data class AuthenticationRequest (
     val username: String,

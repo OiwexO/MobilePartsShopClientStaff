@@ -1,7 +1,7 @@
 package com.iwex.mobilepartsshopstaff.domain.use_case.part.manufacturer
 
-import com.iwex.mobilepartsshopstaff.domain.entity.part.Manufacturer
-import com.iwex.mobilepartsshopstaff.domain.entity.part.ManufacturerRequest
+import com.iwex.mobilepartsshopstaff.domain.entity.part.manufacturer.Manufacturer
+import com.iwex.mobilepartsshopstaff.domain.entity.part.manufacturer.ManufacturerRequest
 import com.iwex.mobilepartsshopstaff.domain.repository.part.ManufacturerRepository
 import javax.inject.Inject
 

@@ -1,8 +1,8 @@
-package com.iwex.mobilepartsshopstaff.domain.repository.order
+package com.iwex.mobilepartsshopstaff.domain.repository.staff
 
 import com.iwex.mobilepartsshopstaff.domain.entity.order.Order
 
-interface OrderRepository {
+interface StaffRepository {
 
     suspend fun getAssignedOrdersByStaffId(staffId: Long): Result<List<Order>>
 

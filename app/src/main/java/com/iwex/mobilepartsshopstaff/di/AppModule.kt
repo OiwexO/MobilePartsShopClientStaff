@@ -7,6 +7,8 @@ import com.iwex.mobilepartsshopstaff.data.remote.MainApiService
 import com.iwex.mobilepartsshopstaff.data.remote.interceptor.AccessTokenInterceptor
 import com.iwex.mobilepartsshopstaff.domain.repository.authentication.JwtTokenRepository
 import com.iwex.mobilepartsshopstaff.BuildConfig
+import com.iwex.mobilepartsshopstaff.data.remote.ApiConstants
+import com.iwex.mobilepartsshopstaff.data.remote.AuthenticationApiService
 
 import dagger.Module
 import dagger.Provides
@@ -64,12 +66,22 @@ object AppModule {
     @[Provides Singleton]
     fun provideMainApiService(@AuthenticatedClient okHttpClient: OkHttpClient): MainApiService {
         return Retrofit.Builder()
-            .baseUrl(BuildConfig.BASE_URL)
+            .baseUrl(ApiConstants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
             .create(MainApiService::class.java)
 
+    }
+
+    @[Provides Singleton]
+    fun provideAuthenticationApiService(@UnauthenticatedClient okHttpClient: OkHttpClient): AuthenticationApiService {
+        return Retrofit.Builder()
+            .baseUrl(ApiConstants.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
+            .build()
+            .create(AuthenticationApiService::class.java)
     }
 
     private const val SHARED_PREFS_NAME = "jwt_prefs"

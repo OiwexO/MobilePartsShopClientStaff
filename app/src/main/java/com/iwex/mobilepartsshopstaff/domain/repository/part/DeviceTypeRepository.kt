@@ -1,7 +1,7 @@
 package com.iwex.mobilepartsshopstaff.domain.repository.part
 
-import com.iwex.mobilepartsshopstaff.domain.entity.part.DeviceType
-import com.iwex.mobilepartsshopstaff.domain.entity.part.DeviceTypeRequest
+import com.iwex.mobilepartsshopstaff.domain.entity.part.device_type.DeviceType
+import com.iwex.mobilepartsshopstaff.domain.entity.part.device_type.DeviceTypeRequest
 
 interface DeviceTypeRepository {
 
