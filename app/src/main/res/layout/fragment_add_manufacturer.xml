@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".presentation.fragment.management.manufacturers.AddManufacturerFragment">
+
+    <EditText
+        android:id="@+id/editTextManufacturerName"
+        style="@style/edit_text"
+        android:autofillHints="name"
+        android:hint="@string/hint_manufacturer_name"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/btnSelectManufacturerLogo"
+        style="@style/button"
+        android:text="@string/select_manufacturer_logo" />
+
+    <ImageView
+        android:id="@+id/imageViewManufacturerLogoPreview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/image_view_margin"
+        android:contentDescription="@string/manufacturer_logo_preview"
+        tools:src="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/btnSaveManufacturer"
+        style="@style/button"
+        android:text="@string/save_manufacturer" />
+
+    <Button
+        android:id="@+id/btnCancel"
+        style="@style/button"
+        android:text="@string/cancel" />
+
+
+</LinearLayout>

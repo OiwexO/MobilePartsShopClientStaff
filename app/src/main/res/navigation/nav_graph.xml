@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.iwex.mobilepartsshopstaff.presentation.fragment.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_managementFragment"
+            app:destination="@id/managementFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/managementFragment"
+        android:name="com.iwex.mobilepartsshopstaff.presentation.fragment.management.ManagementFragment"
+        android:label="fragment_management"
+        tools:layout="@layout/fragment_management" >
+        <action
+            android:id="@+id/action_managementFragment_to_manageManufacturersFragment"
+            app:destination="@id/manageManufacturersFragment"
+            app:popUpTo="@id/managementFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/manageManufacturersFragment"
+        android:name="com.iwex.mobilepartsshopstaff.presentation.fragment.management.manufacturers.ManageManufacturersFragment"
+        android:label="fragment_manage_manufacturers"
+        tools:layout="@layout/fragment_manage_manufacturers" >
+        <action
+            android:id="@+id/action_manageManufacturersFragment_to_addManufacturerFragment"
+            app:destination="@id/addManufacturerFragment"
+            app:popUpTo="@id/manageManufacturersFragment" />
+        <action
+            android:id="@+id/action_manageManufacturersFragment_to_managementFragment"
+            app:destination="@id/managementFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addManufacturerFragment"
+        android:name="com.iwex.mobilepartsshopstaff.presentation.fragment.management.manufacturers.AddManufacturerFragment"
+        android:label="fragment_add_manufacturer"
+        tools:layout="@layout/fragment_add_manufacturer" >
+        <action
+            android:id="@+id/action_addManufacturerFragment_to_manageManufacturersFragment"
+            app:destination="@id/manageManufacturersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.iwex.mobilepartsshopstaff.presentation.fragment.SettingsFragment"
+        tools:layout="@layout/fragment_settings"
+        android:label="SettingsFragment" />
+</navigation>

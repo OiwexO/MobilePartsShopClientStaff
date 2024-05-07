@@ -4,6 +4,7 @@ plugins {
     id("kotlin-parcelize")
     id ("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -61,6 +62,8 @@ dependencies {
     implementation (libs.retrofit)
     implementation (libs.retrofit2.converter.gson)
     implementation(libs.logging.interceptor)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

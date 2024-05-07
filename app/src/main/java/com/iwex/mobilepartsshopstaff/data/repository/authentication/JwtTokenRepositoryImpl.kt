@@ -1,4 +1,4 @@
-package com.iwex.mobilepartsshopstaff.data.local.repository
+package com.iwex.mobilepartsshopstaff.data.repository.authentication
 
 import android.content.SharedPreferences
 import com.iwex.mobilepartsshopstaff.domain.repository.authentication.JwtTokenRepository

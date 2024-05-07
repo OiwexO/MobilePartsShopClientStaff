@@ -1,4 +1,4 @@
-package com.iwex.mobilepartsshopstaff.presentation.fragment.ui.login
+package com.iwex.mobilepartsshopstaff.presentation.fragment
 
 import android.os.Bundle
 import android.text.Editable
@@ -12,8 +12,12 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.iwex.mobilepartsshopstaff.R
 import com.iwex.mobilepartsshopstaff.databinding.FragmentLoginBinding
+import com.iwex.mobilepartsshopstaff.presentation.fragment.ui.login.LoggedInUserView
+import com.iwex.mobilepartsshopstaff.presentation.fragment.ui.login.LoginViewModel
+import com.iwex.mobilepartsshopstaff.presentation.fragment.ui.login.LoginViewModelFactory
 
 
 class LoginFragment : Fragment() {
@@ -114,6 +118,7 @@ class LoginFragment : Fragment() {
         // TODO : initiate successful logged in experience
         val appContext = context?.applicationContext ?: return
         Toast.makeText(appContext, welcome, Toast.LENGTH_LONG).show()
+        findNavController().navigate(R.id.action_loginFragment_to_managementFragment)
     }
 
     private fun showLoginFailed(@StringRes errorString: Int) {

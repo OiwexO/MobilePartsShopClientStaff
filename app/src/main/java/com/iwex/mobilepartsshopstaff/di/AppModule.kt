@@ -2,14 +2,12 @@ package com.iwex.mobilepartsshopstaff.di
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.iwex.mobilepartsshopstaff.data.local.repository.JwtTokenRepositoryImpl
+import com.iwex.mobilepartsshopstaff.data.repository.authentication.JwtTokenRepositoryImpl
+import com.iwex.mobilepartsshopstaff.data.remote.ApiConstants
+import com.iwex.mobilepartsshopstaff.data.remote.AuthenticationApiService
 import com.iwex.mobilepartsshopstaff.data.remote.MainApiService
 import com.iwex.mobilepartsshopstaff.data.remote.interceptor.AccessTokenInterceptor
 import com.iwex.mobilepartsshopstaff.domain.repository.authentication.JwtTokenRepository
-import com.iwex.mobilepartsshopstaff.BuildConfig
-import com.iwex.mobilepartsshopstaff.data.remote.ApiConstants
-import com.iwex.mobilepartsshopstaff.data.remote.AuthenticationApiService
-
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

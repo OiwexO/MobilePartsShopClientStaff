@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Mobile Parts Shop Staff</string>
-    <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
+    <string name="app_name" translatable="false">Mobile Parts Shop Staff</string>
+    <!-- Strings related to LoginFragment -->
+    <string name="prompt_email" translatable="false">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in</string>
     <string name="action_sign_in_short">Sign in</string>
@@ -9,4 +9,29 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <!-- Strings related to BottomNavigationView -->
+    <string name="menu_profile">Profile</string>
+    <string name="menu_management">Management</string>
+    <string name="menu_settings">Settings</string>
+    <!-- Strings related to ManagementFragment -->
+    <string name="btn_manage_manufacturers">Manage manufacturers</string>
+    <string name="btn_manage_device_types">Manage device types</string>
+    <string name="btn_manage_part_types">Manage part types</string>
+    <string name="btn_manage_parts">Manage parts</string>
+    <!-- Strings related to SettingsFragment -->
+    <string name="btn_back">Back</string>
+    <string name="label_language">Language</string>
+    <string name="label_theme">Theme</string>
+    <!-- Strings related to AddManufacturerFragment -->
+    <string name="hint_manufacturer_name">Manufacturer\'s name</string>
+    <string name="save_manufacturer">Save manufacturer</string>
+    <string name="cancel">Cancel</string>
+    <string name="select_manufacturer_logo">Select manufacturer\'s logo</string>
+    <string name="manufacturer_logo_preview">Manufacturer\'s logo preview</string>
+    <!-- Strings related to AddManufacturerFragmentViewModel -->
+    <string name="error_select_logo">Please select logo first</string>
+    <string name="error_enter_name">Please enter name first</string>
+    <!-- Strings related to item_manufacturer -->
+    <string name="manufacturer_logo">Manufacturer\'s logo</string>
+    <string name="add_manufacturer">Add manufacturer</string>
 </resources>
