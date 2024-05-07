@@ -21,6 +21,8 @@ class ApiUtils {
             return "$BASE_URL$PARTS_MAPPING_V1/$partId/image"
         }
 
+        fun nameToRequestBody(name: String) = name.toRequestBody("text/plain".toMediaTypeOrNull())
+
         fun manufacturerLogoToMultiPartBody(logo: File?) = toMultipartBody(
             logo,
             "logo",

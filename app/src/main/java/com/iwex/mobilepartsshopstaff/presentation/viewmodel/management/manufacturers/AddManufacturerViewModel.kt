@@ -20,8 +20,6 @@ class AddManufacturerViewModel @Inject constructor(
     private val updateManufacturerUseCase: UpdateManufacturerUseCase,
 ) : ViewModel() {
 
-    private var selectedImage: File? = null
-
     private var _isSuccess = MutableLiveData(false)
     val isSuccess: LiveData<Boolean>
         get() = _isSuccess
@@ -34,14 +32,16 @@ class AddManufacturerViewModel @Inject constructor(
     val errorMessage: LiveData<Int>
         get() = _errorMessage
 
-    fun createManufacturer(name: String) {
+    fun createManufacturer(name: String, logoImage: File?) {
         if (name.isBlank()) {
             _errorMessage.value = R.string.error_enter_name
+            return
         }
-        if (selectedImage == null) {
+        if (logoImage == null) {
             _errorMessage.value = R.string.error_select_logo
+            return
         }
-        val manufacturerRequest = ManufacturerRequest(name, selectedImage)
+        val manufacturerRequest = ManufacturerRequest(name, logoImage)
         viewModelScope.launch {
             val result = createManufacturerUseCase(manufacturerRequest)
             result.onSuccess {
@@ -52,8 +52,20 @@ class AddManufacturerViewModel @Inject constructor(
         }
     }
 
-    fun setSelectedImageFile(file: File?) {
-        selectedImage = file
+    fun updateManufacturer(manufacturerId: Long, name: String, logoImage: File?) {
+        if (name.isBlank()) {
+            _errorMessage.value = R.string.error_enter_name
+            return
+        }
+        val manufacturerRequest = ManufacturerRequest(name, logoImage)
+        viewModelScope.launch {
+            val result = updateManufacturerUseCase(manufacturerId, manufacturerRequest)
+            result.onSuccess {
+                _isSuccess.value = true
+            }.onFailure {
+                Log.e(TAG, it.toString())
+            }
+        }
     }
 
     companion object {

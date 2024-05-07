@@ -11,8 +11,9 @@ class ManufacturerMapper :
     ResponseRequestMapper<Manufacturer, ManufacturerRequest, ManufacturerResponseDto, ManufacturerRequestDto>() {
 
     override fun toRequestDto(request: ManufacturerRequest): ManufacturerRequestDto {
+        val namePart = ApiUtils.nameToRequestBody(request.name)
         return ManufacturerRequestDto(
-            name = request.name,
+            name = namePart,
             logo = ApiUtils.manufacturerLogoToMultiPartBody(request.logoImage)
         )
     }

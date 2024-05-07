@@ -14,6 +14,8 @@ import com.iwex.mobilepartsshopstaff.data.remote.dto.part.manufacturer.Manufactu
 import com.iwex.mobilepartsshopstaff.data.remote.dto.part.manufacturer.ManufacturerResponseDto
 import com.iwex.mobilepartsshopstaff.data.remote.dto.part.part_type.PartTypeRequestDto
 import com.iwex.mobilepartsshopstaff.data.remote.dto.part.part_type.PartTypeResponseDto
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -21,6 +23,7 @@ import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Part
 import retrofit2.http.Path
 
 interface MainApiService {
@@ -53,12 +56,19 @@ interface MainApiService {
     @GET("$MANUFACTURERS_MAPPING_V1/{manufacturerId}")
     fun getManufacturer(@Path("manufacturerId") manufacturerId: Long): ManufacturerResponseDto
 
-    @Multipart
+    /*@Multipart
     @POST(MANUFACTURERS_MAPPING_V1)
     fun createManufacturer(
         @Body request: ManufacturerRequestDto
-    ): ManufacturerResponseDto
+    ): ManufacturerResponseDto*/
+    @Multipart
+    @POST(MANUFACTURERS_MAPPING_V1)
+    fun createManufacturer(
+        @Part("name") name: RequestBody,
+        @Part logo: MultipartBody.Part
+    ): Call<ManufacturerResponseDto>
 
+    //TODO rewrite updateManufacturer
     @Multipart
     @PUT("$MANUFACTURERS_MAPPING_V1/{manufacturerId}")
     fun updateManufacturer(

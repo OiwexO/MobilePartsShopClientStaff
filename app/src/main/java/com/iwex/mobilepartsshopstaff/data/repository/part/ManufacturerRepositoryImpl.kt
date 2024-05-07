@@ -8,9 +8,6 @@ import com.iwex.mobilepartsshopstaff.domain.repository.part.ManufacturerReposito
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class ManufacturerRepositoryImpl @Inject constructor(
     private val apiService: MainApiService,
@@ -37,7 +34,7 @@ class ManufacturerRepositoryImpl @Inject constructor(
         return Result.success(entity)
     }
 
-    override suspend fun createManufacturer(manufacturerRequest: ManufacturerRequest): Result<Manufacturer> {
+    /*override suspend fun createManufacturer(manufacturerRequest: ManufacturerRequest): Result<Manufacturer> {
         val requestDto = mapper.toRequestDto(manufacturerRequest)
         val response = try {
             apiService.createManufacturer(requestDto)
@@ -46,8 +43,34 @@ class ManufacturerRepositoryImpl @Inject constructor(
         }
         val entity = mapper.toEntity(response)
         return Result.success(entity)
+    }*/
+    override suspend fun createManufacturer(manufacturerRequest: ManufacturerRequest): Result<Manufacturer> {
+        return withContext(Dispatchers.IO) {
+            // Convert ManufacturerRequest to ManufacturerRequestDto
+            val requestDto = mapper.toRequestDto(manufacturerRequest)
+
+            try {
+                // Execute API call asynchronously
+                val response = apiService.createManufacturer(
+                    name = requestDto.name,
+                    logo = requestDto.logo
+                ).execute()
+
+                if (response.isSuccessful) {
+                    // Convert response to entity
+                    val entity = mapper.toEntity(response.body()!!)
+                    Result.success(entity)
+                } else {
+                    val errorBody = response.errorBody()?.string() ?: "Unknown error"
+                    Result.failure(Exception("Failed to create manufacturer: $errorBody"))
+                }
+            } catch (e: Exception) {
+                Result.failure(e)
+            }
+        }
     }
 
+    //TODO rewrite updateManufacturer
     override suspend fun updateManufacturer(
         id: Long,
         manufacturerRequest: ManufacturerRequest

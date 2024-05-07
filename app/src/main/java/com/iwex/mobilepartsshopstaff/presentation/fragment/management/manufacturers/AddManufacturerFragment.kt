@@ -27,6 +27,8 @@ class AddManufacturerFragment : ImagePickerFragment() {
 
     private val viewModel: AddManufacturerViewModel by viewModels()
 
+    private var selectedImageFile: File? = null
+
     private lateinit var editTextManufacturerName: EditText
     private lateinit var btnSelectManufacturerLogo: Button
     private lateinit var imageViewManufacturerLogoPreview: ImageView
@@ -92,7 +94,7 @@ class AddManufacturerFragment : ImagePickerFragment() {
     }
 
     override fun onImagePicked(imageFile: File) {
-        viewModel.setSelectedImageFile(imageFile)
+        selectedImageFile = imageFile
         initManufacturerLogoPreview(imageFile)
     }
 
@@ -105,6 +107,11 @@ class AddManufacturerFragment : ImagePickerFragment() {
 
     private fun saveManufacturer() {
         val name = editTextManufacturerName.text.toString()
-        viewModel.createManufacturer(name)
+        val manufacturer = args.manufacturer
+        if (manufacturer != null) {
+            viewModel.updateManufacturer(manufacturer.id, name, selectedImageFile)
+        } else {
+            viewModel.createManufacturer(name, selectedImageFile)
+        }
     }
 }
