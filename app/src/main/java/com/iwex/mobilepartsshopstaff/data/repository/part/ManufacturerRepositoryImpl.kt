@@ -5,7 +5,12 @@ import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.part.manufacturer.Ma
 import com.iwex.mobilepartsshopstaff.domain.entity.part.manufacturer.Manufacturer
 import com.iwex.mobilepartsshopstaff.domain.entity.part.manufacturer.ManufacturerRequest
 import com.iwex.mobilepartsshopstaff.domain.repository.part.ManufacturerRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ManufacturerRepositoryImpl @Inject constructor(
     private val apiService: MainApiService,
@@ -58,11 +63,19 @@ class ManufacturerRepositoryImpl @Inject constructor(
     }
 
     override suspend fun deleteManufacturer(id: Long): Result<Unit> {
-        return try {
-            apiService.deleteManufacturer(id)
-            Result.success(Unit)
-        } catch (e: Exception) {
-            return Result.failure(e)
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = apiService.deleteManufacturer(id).execute()
+                if (response.isSuccessful) {
+                    Result.success(Unit)
+                } else {
+                    val errorMessage =
+                        "Failed to delete manufacturer. HTTP code: ${response.code()}"
+                    Result.failure(Exception(errorMessage))
+                }
+            } catch (e: Exception) {
+                Result.failure(e)
+            }
         }
     }
 }

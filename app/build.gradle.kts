@@ -19,11 +19,11 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField(
+        /*buildConfigField(
             "String",
             "BASE_URL",
-            "\"10.10.10.105:8080\""
-        )
+            "\"http://192.168.0.112:8080\""
+        )*/
     }
 
     buildTypes {
@@ -44,7 +44,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
-        buildConfig = true
+//        buildConfig = true
     }
 }
 
@@ -64,6 +64,7 @@ dependencies {
     implementation(libs.logging.interceptor)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.glide)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

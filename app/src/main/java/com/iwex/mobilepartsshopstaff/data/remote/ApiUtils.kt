@@ -14,11 +14,11 @@ class ApiUtils {
     companion object {
 
         fun getManufacturerLogoUrl(manufacturerId: Long): String {
-            return "$BASE_URL/$MANUFACTURERS_MAPPING_V1/$manufacturerId/logo"
+            return "$BASE_URL$MANUFACTURERS_MAPPING_V1/$manufacturerId/logo"
         }
 
         fun getPartImageUrl(partId: Long): String {
-            return "$BASE_URL/$PARTS_MAPPING_V1/$partId/image"
+            return "$BASE_URL$PARTS_MAPPING_V1/$partId/image"
         }
 
         fun manufacturerLogoToMultiPartBody(logo: File?) = toMultipartBody(

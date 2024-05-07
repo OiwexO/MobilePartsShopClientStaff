@@ -16,20 +16,38 @@
 
         <ImageView
             android:id="@+id/imageViewManufacturerLogo"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="50dp"
+            android:layout_weight="1"
             android:contentDescription="@string/manufacturer_logo"
-            android:minHeight="50dp"
             tools:src="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/textViewManufacturerName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
             android:textSize="22sp"
             android:textStyle="bold"
             tools:text="Panasonic" />
+
+        <ImageButton
+            android:id="@+id/btnEditManufacturer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/description_edit_manufacturer"
+            android:src="@drawable/ic_edit" />
+
+        <ImageButton
+            android:id="@+id/btnDeleteManufacturer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/description_delete_manufacturer"
+            android:src="@drawable/ic_delete" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

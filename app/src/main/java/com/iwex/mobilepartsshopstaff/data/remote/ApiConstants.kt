@@ -1,7 +1,5 @@
 package com.iwex.mobilepartsshopstaff.data.remote
 
-import com.iwex.mobilepartsshopstaff.BuildConfig
-
 class ApiConstants {
 
     companion object {
@@ -12,7 +10,7 @@ class ApiConstants {
 
         private const val STAFF_MAPPING_V1 = "$GLOBAL_MAPPING_V1/staff"
 
-        const val BASE_URL = BuildConfig.BASE_URL
+        const val BASE_URL = "http://192.168.0.112:8080"
 
         const val AUTHENTICATION_MAPPING_V1 = "$GLOBAL_MAPPING_V1/authentication/authorize/staff-admin"
 

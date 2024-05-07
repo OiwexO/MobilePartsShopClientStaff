@@ -44,7 +44,7 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
             .get(LoginViewModel::class.java)
-
+        findNavController().navigate(R.id.action_loginFragment_to_managementFragment)
         val usernameEditText = binding.username
         val passwordEditText = binding.password
         val loginButton = binding.login

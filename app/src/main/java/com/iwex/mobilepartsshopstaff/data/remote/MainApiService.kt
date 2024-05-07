@@ -14,6 +14,7 @@ import com.iwex.mobilepartsshopstaff.data.remote.dto.part.manufacturer.Manufactu
 import com.iwex.mobilepartsshopstaff.data.remote.dto.part.manufacturer.ManufacturerResponseDto
 import com.iwex.mobilepartsshopstaff.data.remote.dto.part.part_type.PartTypeRequestDto
 import com.iwex.mobilepartsshopstaff.data.remote.dto.part.part_type.PartTypeResponseDto
+import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -47,7 +48,7 @@ interface MainApiService {
     // manufacturers
 
     @GET(MANUFACTURERS_MAPPING_V1)
-    fun getAllManufacturers(): List<ManufacturerResponseDto>
+    suspend fun getAllManufacturers(): List<ManufacturerResponseDto>
 
     @GET("$MANUFACTURERS_MAPPING_V1/{manufacturerId}")
     fun getManufacturer(@Path("manufacturerId") manufacturerId: Long): ManufacturerResponseDto
@@ -66,7 +67,7 @@ interface MainApiService {
     ): ManufacturerResponseDto
 
     @DELETE("$MANUFACTURERS_MAPPING_V1/{manufacturerId}")
-    fun deleteManufacturer(@Path("manufacturerId") manufacturerId: Long)
+    fun deleteManufacturer(@Path("manufacturerId") manufacturerId: Long): Call<Void>
 
     // part types
 
