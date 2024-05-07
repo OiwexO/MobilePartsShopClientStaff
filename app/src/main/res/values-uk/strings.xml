@@ -22,6 +22,8 @@
     <string name="cancel">Скасувати</string>
     <string name="select_manufacturer_logo">Вибрати логотип виробника</string>
     <string name="manufacturer_logo_preview">Логотип виробника</string>
+    <string name="error_select_logo">Будь ласка, оберіть логотип</string>
+    <string name="error_enter_name">Будь ласка, введіть назву</string>
     <string name="manufacturer_logo">Логотип виробника</string>
     <string name="add_manufacturer">Додати виробника</string>
 </resources>
