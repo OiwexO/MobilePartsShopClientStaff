@@ -10,7 +10,6 @@ import com.iwex.mobilepartsshopstaff.data.remote.dto.part.PartRequestDto
 import com.iwex.mobilepartsshopstaff.data.remote.dto.part.PartResponseDto
 import com.iwex.mobilepartsshopstaff.data.remote.dto.part.device_type.DeviceTypeRequestDto
 import com.iwex.mobilepartsshopstaff.data.remote.dto.part.device_type.DeviceTypeResponseDto
-import com.iwex.mobilepartsshopstaff.data.remote.dto.part.manufacturer.ManufacturerRequestDto
 import com.iwex.mobilepartsshopstaff.data.remote.dto.part.manufacturer.ManufacturerResponseDto
 import com.iwex.mobilepartsshopstaff.data.remote.dto.part.part_type.PartTypeRequestDto
 import com.iwex.mobilepartsshopstaff.data.remote.dto.part.part_type.PartTypeResponseDto

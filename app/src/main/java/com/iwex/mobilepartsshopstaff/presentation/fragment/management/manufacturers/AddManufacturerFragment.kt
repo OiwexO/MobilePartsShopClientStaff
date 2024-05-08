@@ -12,7 +12,6 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.transition.Visibility
 import com.bumptech.glide.Glide
 import com.bumptech.glide.signature.ObjectKey
 import com.iwex.mobilepartsshopstaff.R
