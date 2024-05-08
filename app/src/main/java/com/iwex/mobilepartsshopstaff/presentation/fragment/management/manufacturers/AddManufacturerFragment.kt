@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.transition.Visibility
 import com.bumptech.glide.Glide
 import com.bumptech.glide.signature.ObjectKey
 import com.iwex.mobilepartsshopstaff.R
@@ -34,6 +36,7 @@ class AddManufacturerFragment : ImagePickerFragment() {
     private lateinit var imageViewManufacturerLogoPreview: ImageView
     private lateinit var btnSaveManufacturer: Button
     private lateinit var btnCancel: Button
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,6 +63,12 @@ class AddManufacturerFragment : ImagePickerFragment() {
                 navigateToManageManufacturersFragment()
             }
         }
+        viewModel.isProgressBarVisible.observe(viewLifecycleOwner) { isVisible ->
+            switchProgressBarVisibility(isVisible)
+        }
+        viewModel.errorMessage.observe(viewLifecycleOwner) { stringId ->
+            Toast.makeText(requireContext(), stringId, Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun initViews(view: View) {
@@ -68,6 +77,7 @@ class AddManufacturerFragment : ImagePickerFragment() {
         imageViewManufacturerLogoPreview = view.findViewById(R.id.imageViewManufacturerLogoPreview)
         btnSaveManufacturer = view.findViewById(R.id.btnSaveManufacturer)
         btnCancel = view.findViewById(R.id.btnCancel)
+        progressBar = view.findViewById(R.id.progressBarAddManufacturerFragment)
     }
 
     private fun setClickListeners() {
@@ -113,5 +123,9 @@ class AddManufacturerFragment : ImagePickerFragment() {
         } else {
             viewModel.createManufacturer(name, selectedImageFile)
         }
+    }
+
+    private fun switchProgressBarVisibility(isVisible: Boolean) {
+        progressBar.visibility = if (isVisible) View.VISIBLE else View.GONE
     }
 }

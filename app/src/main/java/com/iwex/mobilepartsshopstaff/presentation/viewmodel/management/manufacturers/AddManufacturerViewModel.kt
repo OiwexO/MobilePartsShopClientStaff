@@ -43,6 +43,7 @@ class AddManufacturerViewModel @Inject constructor(
         }
         val manufacturerRequest = ManufacturerRequest(name, logoImage)
         viewModelScope.launch {
+            _isProgressBarVisible.value = true
             val result = createManufacturerUseCase(manufacturerRequest)
             result.onSuccess {
                 _isSuccess.value = true
@@ -50,6 +51,7 @@ class AddManufacturerViewModel @Inject constructor(
                 Log.e(TAG, it.toString())
             }
         }
+        _isProgressBarVisible.value = false
     }
 
     fun updateManufacturer(manufacturerId: Long, name: String, logoImage: File?) {
@@ -59,6 +61,7 @@ class AddManufacturerViewModel @Inject constructor(
         }
         val manufacturerRequest = ManufacturerRequest(name, logoImage)
         viewModelScope.launch {
+            _isProgressBarVisible.value = true
             val result = updateManufacturerUseCase(manufacturerId, manufacturerRequest)
             result.onSuccess {
                 _isSuccess.value = true
@@ -66,6 +69,7 @@ class AddManufacturerViewModel @Inject constructor(
                 Log.e(TAG, it.toString())
             }
         }
+        _isProgressBarVisible.value = false
     }
 
     companion object {

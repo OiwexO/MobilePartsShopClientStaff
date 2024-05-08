@@ -65,16 +65,16 @@ interface MainApiService {
     @POST(MANUFACTURERS_MAPPING_V1)
     fun createManufacturer(
         @Part("name") name: RequestBody,
-        @Part logo: MultipartBody.Part
+        @Part logo: MultipartBody.Part,
     ): Call<ManufacturerResponseDto>
 
-    //TODO rewrite updateManufacturer
     @Multipart
     @PUT("$MANUFACTURERS_MAPPING_V1/{manufacturerId}")
     fun updateManufacturer(
         @Path("manufacturerId") manufacturerId: Long,
-        @Body request: ManufacturerRequestDto
-    ): ManufacturerResponseDto
+        @Part("name") name: RequestBody,
+        @Part logo: MultipartBody.Part,
+    ): Call<ManufacturerResponseDto>
 
     @DELETE("$MANUFACTURERS_MAPPING_V1/{manufacturerId}")
     fun deleteManufacturer(@Path("manufacturerId") manufacturerId: Long): Call<Void>

@@ -70,19 +70,29 @@ class ManufacturerRepositoryImpl @Inject constructor(
         }
     }
 
-    //TODO rewrite updateManufacturer
     override suspend fun updateManufacturer(
         id: Long,
         manufacturerRequest: ManufacturerRequest
     ): Result<Manufacturer> {
-        val requestDto = mapper.toRequestDto(manufacturerRequest)
-        val response = try {
-            apiService.updateManufacturer(id, requestDto)
-        } catch (e: Exception) {
-            return Result.failure(e)
+        return withContext(Dispatchers.IO) {
+            val requestDto = mapper.toRequestDto(manufacturerRequest)
+            try {
+                val response = apiService.updateManufacturer(
+                    manufacturerId = id,
+                    name = requestDto.name,
+                    logo = requestDto.logo,
+                ).execute()
+                if (response.isSuccessful) {
+                    val entity = mapper.toEntity(response.body()!!)
+                    Result.success(entity)
+                } else {
+                    val errorBody = response.errorBody()?.string() ?: "Unknown error"
+                    Result.failure(Exception("Failed to update manufacturer: $errorBody"))
+                }
+            } catch (e: Exception) {
+                Result.failure(e)
+            }
         }
-        val entity = mapper.toEntity(response)
-        return Result.success(entity)
     }
 
     override suspend fun deleteManufacturer(id: Long): Result<Unit> {
