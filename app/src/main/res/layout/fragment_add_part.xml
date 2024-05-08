@@ -95,35 +95,60 @@
                 android:minLines="3" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Manufacturer Label -->
+        <TextView
+            android:id="@+id/textViewManufacturerLabel"
+            style="@style/add_part_spinner_label"
+            android:text="@string/select_manufacturer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tilSpecifications" />
+
         <!-- Manufacturer Spinner -->
         <Spinner
             android:id="@+id/spinnerManufacturer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tilSpecifications" />
+            app:layout_constraintTop_toBottomOf="@id/textViewManufacturerLabel" />
+
+        <!-- Device Type Label -->
+        <TextView
+            android:id="@+id/textViewDeviceTypeLabel"
+            style="@style/add_part_spinner_label"
+            android:text="@string/select_device_type"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinnerManufacturer" />
 
         <!-- Device Type Spinner -->
         <Spinner
             android:id="@+id/spinnerDeviceType"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/spinnerManufacturer" />
+            app:layout_constraintTop_toBottomOf="@id/textViewDeviceTypeLabel" />
+
+        <!-- Part Type Label -->
+        <TextView
+            android:id="@+id/textViewPartTypeLabel"
+            style="@style/add_part_spinner_label"
+            android:text="@string/select_part_type"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinnerDeviceType" />
 
         <!-- Part Type Spinner -->
         <Spinner
             android:id="@+id/spinnerPartType"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/spinnerDeviceType" />
+            app:layout_constraintTop_toBottomOf="@id/textViewPartTypeLabel" />
+
 
         <!-- Button to Add Image -->
         <Button
@@ -141,7 +166,7 @@
             android:id="@+id/imageViewPartImagePreview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_margin="8dp"
             android:contentDescription="@string/description_part_image"
             app:layout_constraintBottom_toTopOf="@id/btnSavePart"
             app:layout_constraintEnd_toEndOf="parent"
@@ -156,9 +181,9 @@
             android:layout_margin="0dp"
             android:layout_marginTop="16dp"
             android:text="@string/save_part"
+            app:layout_constraintBottom_toTopOf="@id/btnCancel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/btnCancel"
             app:layout_constraintTop_toBottomOf="@id/imageViewPartImagePreview" />
 
         <!-- Button to Cancel -->
@@ -168,10 +193,10 @@
             android:layout_margin="0dp"
             android:layout_marginTop="16dp"
             android:text="@string/cancel"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnSavePart"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/btnSavePart" />
 
         <ProgressBar
             android:id="@+id/progressBarAddPartFragment"

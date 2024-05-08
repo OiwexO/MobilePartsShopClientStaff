@@ -33,4 +33,15 @@
     <string name="price_placeholder">Ціна: %s грн.</string>
     <string name="description_edit_part">Редагувати комплектуючу</string>
     <string name="description_delete_part">Видалити комплектуючу</string>
+    <string name="hint_part_name">Назва комплектуючої</string>
+    <string name="hint_price">Ціна</string>
+    <string name="hint_quantity">Кількість</string>
+    <string name="hint_device_models">Моделі пристроїв</string>
+    <string name="hint_specifications">Характеристики</string>
+    <string name="description_part_image">Зображення комплектуючої</string>
+    <string name="select_part_image">Вибрати зображення</string>
+    <string name="save_part">Зберегти комплектуючу</string>
+    <string name="select_manufacturer">Виберіть виробника:</string>
+    <string name="select_device_type">Виберіть тип пристрою:</string>
+    <string name="select_part_type">Виберіть тип комплектуючої:</string>
 </resources>
