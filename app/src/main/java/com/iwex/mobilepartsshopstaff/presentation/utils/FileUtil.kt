@@ -9,7 +9,7 @@ import java.io.InputStream
 
 object FileUtil {
 
-    const val FILENAME = "temp_image"
+    private const val FILENAME = "temp_image"
 
 //    private val FILENAME: String
 //        get() = "image${System.currentTimeMillis()}"

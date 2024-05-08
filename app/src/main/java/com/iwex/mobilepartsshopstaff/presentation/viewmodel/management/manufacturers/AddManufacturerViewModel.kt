@@ -24,9 +24,9 @@ class AddManufacturerViewModel @Inject constructor(
     val isSuccess: LiveData<Boolean>
         get() = _isSuccess
 
-    private var _isProgressBarVisible = MutableLiveData(false)
-    val isProgressBarVisible: LiveData<Boolean>
-        get() = _isProgressBarVisible
+    private var _isLoading = MutableLiveData(false)
+    val isLoading: LiveData<Boolean>
+        get() = _isLoading
 
     private var _errorMessage = MutableLiveData<Int>()
     val errorMessage: LiveData<Int>
@@ -43,7 +43,7 @@ class AddManufacturerViewModel @Inject constructor(
         }
         val manufacturerRequest = ManufacturerRequest(name, logoImage)
         viewModelScope.launch {
-            _isProgressBarVisible.value = true
+            _isLoading.value = true
             val result = createManufacturerUseCase(manufacturerRequest)
             result.onSuccess {
                 _isSuccess.value = true
@@ -51,7 +51,7 @@ class AddManufacturerViewModel @Inject constructor(
                 Log.e(TAG, it.toString())
             }
         }
-        _isProgressBarVisible.value = false
+        _isLoading.value = false
     }
 
     fun updateManufacturer(manufacturerId: Long, name: String, logoImage: File?) {
@@ -61,7 +61,7 @@ class AddManufacturerViewModel @Inject constructor(
         }
         val manufacturerRequest = ManufacturerRequest(name, logoImage)
         viewModelScope.launch {
-            _isProgressBarVisible.value = true
+            _isLoading.value = true
             val result = updateManufacturerUseCase(manufacturerId, manufacturerRequest)
             result.onSuccess {
                 _isSuccess.value = true
@@ -69,7 +69,7 @@ class AddManufacturerViewModel @Inject constructor(
                 Log.e(TAG, it.toString())
             }
         }
-        _isProgressBarVisible.value = false
+        _isLoading.value = false
     }
 
     companion object {

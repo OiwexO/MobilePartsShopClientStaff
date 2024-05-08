@@ -3,7 +3,10 @@ package com.iwex.mobilepartsshopstaff.di
 import com.iwex.mobilepartsshopstaff.data.remote.ApiConstants
 import com.iwex.mobilepartsshopstaff.data.remote.AuthenticationApiService
 import com.iwex.mobilepartsshopstaff.data.remote.MainApiService
+import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.part.PartMapper
+import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.part.device_type.DeviceTypeMapper
 import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.part.manufacturer.ManufacturerMapper
+import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.part.part_type.PartTypeMapper
 import com.iwex.mobilepartsshopstaff.data.remote.interceptor.AccessTokenInterceptor
 import dagger.Module
 import dagger.Provides
@@ -69,5 +72,18 @@ object NetworkModule {
     }
 
     @[Provides Singleton]
+    fun provideDeviceTypeMapper(): DeviceTypeMapper = DeviceTypeMapper()
+
+    @[Provides Singleton]
     fun provideManufacturerMapper(): ManufacturerMapper = ManufacturerMapper()
+
+    @[Provides Singleton]
+    fun providePartTypeMapper(): PartTypeMapper = PartTypeMapper()
+
+    @[Provides Singleton]
+    fun providePartMapper(
+        manufacturerMapper: ManufacturerMapper,
+        deviceTypeMapper: DeviceTypeMapper,
+        partTypeMapper: PartTypeMapper,
+    ): PartMapper = PartMapper(manufacturerMapper, deviceTypeMapper, partTypeMapper)
 }

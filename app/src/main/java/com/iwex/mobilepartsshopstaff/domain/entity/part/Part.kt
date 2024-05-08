@@ -3,6 +3,7 @@ package com.iwex.mobilepartsshopstaff.domain.entity.part
 import com.iwex.mobilepartsshopstaff.domain.entity.part.device_type.DeviceType
 import com.iwex.mobilepartsshopstaff.domain.entity.part.manufacturer.Manufacturer
 import com.iwex.mobilepartsshopstaff.domain.entity.part.part_type.PartType
+import java.io.Serializable
 
 data class Part(
     val id: Long,
@@ -15,4 +16,4 @@ data class Part(
     val deviceType: DeviceType,
     val partType: PartType,
     val imageUrl: String,
-)
+) : Serializable

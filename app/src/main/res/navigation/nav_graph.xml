@@ -21,8 +21,10 @@
         tools:layout="@layout/fragment_management" >
         <action
             android:id="@+id/action_managementFragment_to_manageManufacturersFragment"
-            app:destination="@id/manageManufacturersFragment"
-            app:popUpTo="@id/managementFragment" />
+            app:destination="@id/manageManufacturersFragment" />
+        <action
+            android:id="@+id/action_managementFragment_to_managePartsFragment"
+            app:destination="@id/managePartsFragment" />
     </fragment>
     <fragment
         android:id="@+id/manageManufacturersFragment"
@@ -31,8 +33,7 @@
         tools:layout="@layout/fragment_manage_manufacturers" >
         <action
             android:id="@+id/action_manageManufacturersFragment_to_addManufacturerFragment"
-            app:destination="@id/addManufacturerFragment"
-            app:popUpTo="@id/manageManufacturersFragment" />
+            app:destination="@id/addManufacturerFragment" />
         <action
             android:id="@+id/action_manageManufacturersFragment_to_managementFragment"
             app:destination="@id/managementFragment"
@@ -62,4 +63,31 @@
         android:name="com.iwex.mobilepartsshopstaff.presentation.fragment.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/managePartsFragment"
+        android:name="com.iwex.mobilepartsshopstaff.presentation.fragment.management.parts.ManagePartsFragment"
+        android:label="fragment_manage_parts"
+        tools:layout="@layout/fragment_manage_parts" >
+        <action
+            android:id="@+id/action_managePartsFragment_to_managementFragment"
+            app:destination="@id/managementFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_managePartsFragment_to_addPartFragment"
+            app:destination="@id/addPartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPartFragment"
+        android:name="com.iwex.mobilepartsshopstaff.presentation.fragment.management.parts.AddPartFragment"
+        tools:layout="@layout/fragment_add_part"
+        android:label="AddPartFragment" >
+        <action
+            android:id="@+id/action_addPartFragment_to_managePartsFragment"
+            app:destination="@id/managePartsFragment" />
+        <argument
+            android:name="part"
+            app:argType="com.iwex.mobilepartsshopstaff.domain.entity.part.Part"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 </navigation>

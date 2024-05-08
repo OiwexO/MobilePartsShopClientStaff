@@ -14,7 +14,7 @@ import javax.inject.Inject
 class PartMapper @Inject constructor(
     private val manufacturerMapper: ManufacturerMapper,
     private val deviceTypeMapper: DeviceTypeMapper,
-    private val partTypeMapper: PartTypeMapper
+    private val partTypeMapper: PartTypeMapper,
 ) : ResponseRequestMapper<Part, PartRequest, PartResponseDto, PartRequestDto>() {
 
     override fun toRequestDto(request: PartRequest): PartRequestDto {

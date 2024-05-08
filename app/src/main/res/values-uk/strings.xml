@@ -26,4 +26,11 @@
     <string name="error_enter_name">Будь ласка, введіть назву</string>
     <string name="manufacturer_logo">Логотип виробника</string>
     <string name="add_manufacturer">Додати виробника</string>
+    <string name="description_edit_manufacturer">Редагувати виробника</string>
+    <string name="description_delete_manufacturer">Видалити виробника</string>
+    <string name="add_part">Додати комплектуючу</string>
+    <string name="part_image">Зображення комплектуючої</string>
+    <string name="price_placeholder">Ціна: %s грн.</string>
+    <string name="description_edit_part">Редагувати комплектуючу</string>
+    <string name="description_delete_part">Видалити комплектуючу</string>
 </resources>

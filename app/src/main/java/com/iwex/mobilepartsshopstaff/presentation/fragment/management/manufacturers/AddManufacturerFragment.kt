@@ -62,8 +62,8 @@ class AddManufacturerFragment : ImagePickerFragment() {
                 navigateToManageManufacturersFragment()
             }
         }
-        viewModel.isProgressBarVisible.observe(viewLifecycleOwner) { isVisible ->
-            switchProgressBarVisibility(isVisible)
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            switchProgressBarVisibility(isLoading)
         }
         viewModel.errorMessage.observe(viewLifecycleOwner) { stringId ->
             Toast.makeText(requireContext(), stringId, Toast.LENGTH_LONG).show()

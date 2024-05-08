@@ -47,15 +47,9 @@ class ManageManufacturersFragment : Fragment() {
         viewModel.manufacturers.observe(viewLifecycleOwner) { manufacturers ->
             manufacturersListAdapter.submitList(manufacturers)
         }
-
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-            if (isLoading) {
-                showProgressBar()
-            } else {
-                hideProgressBar()
-            }
+            switchProgressBarVisibility(isLoading)
         }
-
         viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
             Log.e(TAG, errorMessage)
             Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
@@ -63,14 +57,8 @@ class ManageManufacturersFragment : Fragment() {
         viewModel.getAllManufacturers()
     }
 
-    private fun showProgressBar() {
-        // Show progress bar
-        progressBar.visibility = View.VISIBLE
-    }
-
-    private fun hideProgressBar() {
-        // Hide progress bar
-        progressBar.visibility = View.GONE
+    private fun switchProgressBarVisibility(isVisible: Boolean) {
+        progressBar.visibility = if (isVisible) View.VISIBLE else View.GONE
     }
 
     private fun initViews(view: View) {
@@ -92,6 +80,7 @@ class ManageManufacturersFragment : Fragment() {
             navigateToAddManufacturerFragment(it)
         }
     }
+
     private fun setOnDeleteManufacturerClickListener() {
         manufacturersListAdapter.onDeleteManufacturerClickListener = {
             viewModel.deleteManufacturerById(it.id)
@@ -108,8 +97,10 @@ class ManageManufacturersFragment : Fragment() {
     }
 
     private fun navigateToAddManufacturerFragment(manufacturer: Manufacturer? = null) {
-        findNavController().navigate(ManageManufacturersFragmentDirections
-            .actionManageManufacturersFragmentToAddManufacturerFragment(manufacturer))
+        findNavController().navigate(
+            ManageManufacturersFragmentDirections
+                .actionManageManufacturersFragmentToAddManufacturerFragment(manufacturer)
+        )
     }
 
     private fun navigateToManagementFragment() {

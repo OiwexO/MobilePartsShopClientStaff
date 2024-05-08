@@ -10,6 +10,7 @@ import com.iwex.mobilepartsshopstaff.domain.entity.part.manufacturer.Manufacture
 class ManufacturersListAdapter : ListAdapter<Manufacturer, ManufacturerViewHolder>(ManufacturerDiffCallback()) {
 
     var onEditManufacturerClickListener: ((Manufacturer) -> Unit)? = null
+
     var onDeleteManufacturerClickListener: ((Manufacturer) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ManufacturerViewHolder {

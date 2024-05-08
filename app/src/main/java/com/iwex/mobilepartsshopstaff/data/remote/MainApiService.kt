@@ -53,7 +53,7 @@ interface MainApiService {
     suspend fun getAllManufacturers(): List<ManufacturerResponseDto>
 
     @GET("$MANUFACTURERS_MAPPING_V1/{manufacturerId}")
-    fun getManufacturer(@Path("manufacturerId") manufacturerId: Long): ManufacturerResponseDto
+    suspend fun getManufacturer(@Path("manufacturerId") manufacturerId: Long): ManufacturerResponseDto
 
     /*@Multipart
     @POST(MANUFACTURERS_MAPPING_V1)
@@ -62,65 +62,65 @@ interface MainApiService {
     ): ManufacturerResponseDto*/
     @Multipart
     @POST(MANUFACTURERS_MAPPING_V1)
-    fun createManufacturer(
+    suspend fun createManufacturer(
         @Part("name") name: RequestBody,
         @Part logo: MultipartBody.Part,
     ): Call<ManufacturerResponseDto>
 
     @Multipart
     @PUT("$MANUFACTURERS_MAPPING_V1/{manufacturerId}")
-    fun updateManufacturer(
+    suspend fun updateManufacturer(
         @Path("manufacturerId") manufacturerId: Long,
         @Part("name") name: RequestBody,
         @Part logo: MultipartBody.Part,
     ): Call<ManufacturerResponseDto>
 
     @DELETE("$MANUFACTURERS_MAPPING_V1/{manufacturerId}")
-    fun deleteManufacturer(@Path("manufacturerId") manufacturerId: Long): Call<Void>
+    suspend fun deleteManufacturer(@Path("manufacturerId") manufacturerId: Long): Call<Void>
 
     // part types
 
     @GET(PART_TYPES_MAPPING_V1)
-    fun getAllPartTypes(): List<PartTypeResponseDto>
+    suspend fun getAllPartTypes(): List<PartTypeResponseDto>
 
     @GET("$PART_TYPES_MAPPING_V1/{partTypeId}")
-    fun getPartType(@Path("partTypeId") partTypeId: Long): PartTypeResponseDto
+    suspend fun getPartType(@Path("partTypeId") partTypeId: Long): PartTypeResponseDto
 
     @POST(PART_TYPES_MAPPING_V1)
-    fun createPartType(@Body request: PartTypeRequestDto): PartTypeResponseDto
+    suspend fun createPartType(@Body request: PartTypeRequestDto): PartTypeResponseDto
 
     @PUT("$PART_TYPES_MAPPING_V1/{partTypeId}")
-    fun updatePartType(
+    suspend fun updatePartType(
         @Path("partTypeId") partTypeId: Long,
         @Body request: PartTypeRequestDto
     ): PartTypeResponseDto
 
     @DELETE("$PART_TYPES_MAPPING_V1/{partTypeId}")
-    fun deletePartType(@Path("partTypeId") partTypeId: Long)
+    suspend fun deletePartType(@Path("partTypeId") partTypeId: Long)
 
     // parts
 
     @GET(PARTS_MAPPING_V1)
-    fun getAllParts(): List<PartResponseDto>
+    suspend fun getAllParts(): List<PartResponseDto>
 
     @GET("$PARTS_MAPPING_V1/{partId}")
-    fun getPart(@Path("partId") partId: Long): PartResponseDto
+    suspend fun getPart(@Path("partId") partId: Long): PartResponseDto
 
     @POST(PARTS_MAPPING_V1)
-    fun createPart(@Body request: PartRequestDto): PartResponseDto
+    suspend fun createPart(@Body request: PartRequestDto): PartResponseDto
 
     @PUT("$PARTS_MAPPING_V1/{partId}")
-    fun updatePart(@Path("partId") partId: Long, @Body request: PartRequestDto): PartResponseDto
+    suspend fun updatePart(@Path("partId") partId: Long, @Body request: PartRequestDto): PartResponseDto
 
     @DELETE("$PARTS_MAPPING_V1/{partId}")
-    fun deletePart(@Path("partId") partId: Long)
+    suspend fun deletePart(@Path("partId") partId: Long)
 
     // staffs
 
     @GET("$STAFFS_MAPPING_V1/{staffId}/orders")
-    fun getAssignedOrders(@Path("staffId") staffId: Long): List<OrderResponseDto>
+    suspend fun getAssignedOrders(@Path("staffId") staffId: Long): List<OrderResponseDto>
 
     @PUT("$STAFFS_MAPPING_V1/order/{orderId}/status")
-    fun updateOrderStatus(@Path("orderId") orderId: Long): OrderResponseDto
+    suspend fun updateOrderStatus(@Path("orderId") orderId: Long): OrderResponseDto
 }
 
