@@ -23,6 +23,11 @@
     <string name="btn_back">Back</string>
     <string name="label_language">Language</string>
     <string name="label_theme">Theme</string>
+    <string name="item_language_en" translatable="false">English</string>
+    <string name="item_language_uk" translatable="false">Українська</string>
+    <string name="item_theme_system_default">System Default</string>
+    <string name="item_theme_light">Light</string>
+    <string name="item_theme_dark">Dark</string>
     <!-- Strings related to AddManufacturerFragment -->
     <string name="hint_manufacturer_name">Manufacturer\'s name</string>
     <string name="save_manufacturer">Save manufacturer</string>

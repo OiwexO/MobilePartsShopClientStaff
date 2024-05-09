@@ -62,4 +62,7 @@
     <string name="generate_report">Згенерувати звіт</string>
     <string name="save">Зберегти</string>
     <string name="user_avatar">Аватар користувача</string>
+    <string name="item_theme_system_default">Системна</string>
+    <string name="item_theme_light">Світла</string>
+    <string name="item_theme_dark">Темна</string>
 </resources>
