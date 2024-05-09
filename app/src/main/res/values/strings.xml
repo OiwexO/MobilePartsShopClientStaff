@@ -73,4 +73,5 @@
     <string name="manage_assigned_orders">Manage assigned orders</string>
     <string name="generate_report">Generate report</string>
     <string name="save">Save</string>
+    <string name="user_avatar">User\'s avatar</string>
 </resources>

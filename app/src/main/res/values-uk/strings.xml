@@ -60,4 +60,6 @@
     <string name="change_personal_info">Змінити персональні дані</string>
     <string name="manage_assigned_orders">Управління призначеними замовленнями</string>
     <string name="generate_report">Згенерувати звіт</string>
+    <string name="save">Зберегти</string>
+    <string name="user_avatar">Аватар користувача</string>
 </resources>

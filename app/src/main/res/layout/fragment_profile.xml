@@ -10,6 +10,7 @@
         android:layout_width="@dimen/profile_avatar_size"
         android:layout_height="@dimen/profile_avatar_size"
         android:background="@drawable/circle_background"
+        android:contentDescription="@string/user_avatar"
         android:src="@drawable/placeholder_avatar"
         app:layout_constraintBottom_toTopOf="@+id/textViewUserId"
         app:layout_constraintEnd_toEndOf="parent"
