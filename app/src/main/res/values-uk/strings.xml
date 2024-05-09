@@ -44,4 +44,13 @@
     <string name="select_manufacturer">Виберіть виробника:</string>
     <string name="select_device_type">Виберіть тип пристрою:</string>
     <string name="select_part_type">Виберіть тип комплектуючої:</string>
+    <string name="invalid_price">Неправильна ціна</string>
+    <string name="invalid_quantity">Неправильна кількість</string>
+    <string name="invalid_part_name">Неправильна назва</string>
+    <string name="invalid_specifications">Неправильні характеристики</string>
+    <string name="invalid_manufacturer">Неправильний виробник</string>
+    <string name="invalid_device_type">Неправильний тип пристрою</string>
+    <string name="invalid_part_type">Неправильний тип комплектуючої</string>
+    <string name="invalid_part_image">Зображення не обрано</string>
+    <string name="saved">Збережено</string>
 </resources>

@@ -17,6 +17,7 @@ import com.bumptech.glide.signature.ObjectKey
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.iwex.mobilepartsshopstaff.R
+import com.iwex.mobilepartsshopstaff.domain.entity.part.PartRequest
 import com.iwex.mobilepartsshopstaff.domain.entity.part.device_type.DeviceType
 import com.iwex.mobilepartsshopstaff.domain.entity.part.manufacturer.Manufacturer
 import com.iwex.mobilepartsshopstaff.domain.entity.part.part_type.PartType
@@ -114,17 +115,30 @@ class AddPartFragment : ImagePickerFragment() {
         viewModel.partTypes.observe(viewLifecycleOwner) {
             setupPartTypesSpinner(it)
         }
+        viewModel.addPartFormState.observe(viewLifecycleOwner) { state ->
+            if (!state.isDataValid) {
+                state.nameError?.let { showError(it, tilName) }
+                state.priceError?.let { showError(it, tilPrice) }
+                state.quantityError?.let { showError(it, tilQuantity) }
+                state.deviceModelsError?.let { showError(it, tilDeviceModels) }
+                state.specificationsError?.let { showError(it, tilSpecifications) }
+                state.manufacturerError?.let { showError(it) }
+                state.deviceTypeError?.let { showError(it) }
+                state.partTypeError?.let { showError(it) }
+                state.imageError?.let { showError(it) }
+            }
+        }
         viewModel.isSuccess.observe(viewLifecycleOwner) { isSuccess ->
             if (isSuccess) {
-                Toast.makeText(requireContext(), "Saved", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), R.string.saved, Toast.LENGTH_SHORT).show()
                 navigateToManagePartsFragment()
             }
         }
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             switchProgressBarVisibility(isLoading)
         }
-        viewModel.errorMessage.observe(viewLifecycleOwner) { stringId ->
-            Toast.makeText(requireContext(), stringId, Toast.LENGTH_LONG).show()
+        viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
+            Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
         }
         viewModel.loadData()
     }
@@ -170,10 +184,56 @@ class AddPartFragment : ImagePickerFragment() {
     }
 
     private fun savePart() {
+        clearErrors()
+        val price = editTextPrice.text.toString().toDoubleOrNull() ?: 0.0
+        val quantity = editTextQuantity.text.toString().toIntOrNull() ?: 0
+        val name = editTextName.text.toString().trim()
+        val deviceModels =
+            editTextDeviceModels.text.toString().split(DEVICE_MODELS_DELIMITER).map { it.trim() }
+        val specifications = editTextSpecifications.text.toString().trim()
+        val manufacturerId = (spinnerManufacturer.selectedItem as? Manufacturer)?.id ?: 0
+        val deviceTypeId = (spinnerDeviceType.selectedItem as? DeviceType)?.id ?: 0
+        val partTypeId = (spinnerPartType.selectedItem as? PartType)?.id ?: 0
+        val image = selectedImageFile
+        val partRequest = PartRequest(
+            price = price,
+            quantity = quantity,
+            name = name,
+            deviceModels = deviceModels,
+            specifications = specifications,
+            manufacturerId = manufacturerId,
+            deviceTypeId = deviceTypeId,
+            partTypeId = partTypeId,
+            image = image
+        )
+        val part = args.part
+        if (part == null) {
+            viewModel.createPart(partRequest)
+        } else {
+            viewModel.updatePart(part.id, partRequest)
+        }
+    }
+
+    private fun showError(stringId: Int, textInputLayout: TextInputLayout? = null) {
+        if (textInputLayout == null) {
+            Toast.makeText(requireContext(), stringId, Toast.LENGTH_LONG).show()
+            return
+        }
+        textInputLayout.error = getString(stringId)
+    }
+
+    private fun clearErrors() {
+        tilName.error = null
+        tilPrice.error = null
+        tilQuantity.error = null
+        tilDeviceModels.error = null
+        tilSpecifications.error = null
     }
 
     companion object {
 
         private const val TAG = "AddPartFr"
+
+        private const val DEVICE_MODELS_DELIMITER = ","
     }
 }

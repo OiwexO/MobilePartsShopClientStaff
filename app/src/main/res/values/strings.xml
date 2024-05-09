@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name" translatable="false">Mobile Parts Shop Staff</string>
+    <string name="saved">Saved</string>
     <!-- Strings related to LoginFragment -->
     <string name="prompt_email" translatable="false">Email</string>
     <string name="prompt_password">Password</string>
@@ -55,4 +56,12 @@
     <string name="select_manufacturer">Select manufacturer:</string>
     <string name="select_device_type">Select device type:</string>
     <string name="select_part_type">Select part type:</string>
+    <string name="invalid_price">Invalid price</string>
+    <string name="invalid_quantity">Invalid quantity</string>
+    <string name="invalid_part_name">Invalid part name</string>
+    <string name="invalid_specifications">Invalid specifications</string>
+    <string name="invalid_manufacturer">Invalid manufacturer</string>
+    <string name="invalid_device_type">Invalid device type</string>
+    <string name="invalid_part_type">Invalid part type</string>
+    <string name="invalid_part_image">Part image not selected</string>
 </resources>

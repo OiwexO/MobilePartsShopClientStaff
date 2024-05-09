@@ -5,8 +5,6 @@ import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.part.manufacturer.Ma
 import com.iwex.mobilepartsshopstaff.domain.entity.part.manufacturer.Manufacturer
 import com.iwex.mobilepartsshopstaff.domain.entity.part.manufacturer.ManufacturerRequest
 import com.iwex.mobilepartsshopstaff.domain.repository.part.ManufacturerRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class ManufacturerRepositoryImpl @Inject constructor(
@@ -34,81 +32,45 @@ class ManufacturerRepositoryImpl @Inject constructor(
         return Result.success(entity)
     }
 
-    /*override suspend fun createManufacturer(manufacturerRequest: ManufacturerRequest): Result<Manufacturer> {
+    override suspend fun createManufacturer(manufacturerRequest: ManufacturerRequest): Result<Manufacturer> {
         val requestDto = mapper.toRequestDto(manufacturerRequest)
         val response = try {
-            apiService.createManufacturer(requestDto)
+            apiService.createManufacturer(
+                name = requestDto.name,
+                logo = requestDto.logo
+            )
         } catch (e: Exception) {
             return Result.failure(e)
         }
         val entity = mapper.toEntity(response)
         return Result.success(entity)
-    }*/
-    override suspend fun createManufacturer(manufacturerRequest: ManufacturerRequest): Result<Manufacturer> {
-        return withContext(Dispatchers.IO) {
-            // Convert ManufacturerRequest to ManufacturerRequestDto
-            val requestDto = mapper.toRequestDto(manufacturerRequest)
-
-            try {
-                // Execute API call asynchronously
-                val response = apiService.createManufacturer(
-                    name = requestDto.name,
-                    logo = requestDto.logo
-                ).execute()
-
-                if (response.isSuccessful) {
-                    // Convert response to entity
-                    val entity = mapper.toEntity(response.body()!!)
-                    Result.success(entity)
-                } else {
-                    val errorBody = response.errorBody()?.string() ?: "Unknown error"
-                    Result.failure(Exception("Failed to create manufacturer: $errorBody"))
-                }
-            } catch (e: Exception) {
-                Result.failure(e)
-            }
-        }
     }
 
     override suspend fun updateManufacturer(
         id: Long,
         manufacturerRequest: ManufacturerRequest
     ): Result<Manufacturer> {
-        return withContext(Dispatchers.IO) {
-            val requestDto = mapper.toRequestDto(manufacturerRequest)
-            try {
-                val response = apiService.updateManufacturer(
-                    manufacturerId = id,
-                    name = requestDto.name,
-                    logo = requestDto.logo,
-                ).execute()
-                if (response.isSuccessful) {
-                    val entity = mapper.toEntity(response.body()!!)
-                    Result.success(entity)
-                } else {
-                    val errorBody = response.errorBody()?.string() ?: "Unknown error"
-                    Result.failure(Exception("Failed to update manufacturer: $errorBody"))
-                }
-            } catch (e: Exception) {
-                Result.failure(e)
-            }
+        val requestDto = mapper.toRequestDto(manufacturerRequest)
+        val response = try {
+            apiService.updateManufacturer(
+                manufacturerId = id,
+                name = requestDto.name,
+                logo = requestDto.logo,
+            )
+        } catch (e: Exception) {
+            return Result.failure(e)
         }
+        val entity = mapper.toEntity(response)
+        return Result.success(entity)
     }
 
     override suspend fun deleteManufacturer(id: Long): Result<Unit> {
-        return withContext(Dispatchers.IO) {
-            try {
-                val response = apiService.deleteManufacturer(id).execute()
-                if (response.isSuccessful) {
-                    Result.success(Unit)
-                } else {
-                    val errorMessage =
-                        "Failed to delete manufacturer. HTTP code: ${response.code()}"
-                    Result.failure(Exception(errorMessage))
-                }
-            } catch (e: Exception) {
-                Result.failure(e)
-            }
+        return try {
+            apiService.deleteManufacturer(id)
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
         }
+
     }
 }

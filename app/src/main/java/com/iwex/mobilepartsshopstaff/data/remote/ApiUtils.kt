@@ -21,7 +21,16 @@ class ApiUtils {
             return "$BASE_URL$PARTS_MAPPING_V1/$partId/image"
         }
 
-        fun nameToRequestBody(name: String) = name.toRequestBody("text/plain".toMediaTypeOrNull())
+        fun stringToRequestBody(value: String) =
+            value.toRequestBody("text/plain".toMediaTypeOrNull())
+
+        fun stringsToRequestBody(values: List<String>) = values.map { stringToRequestBody(it) }
+
+        fun intToRequestBody(value: Int) = stringToRequestBody("$value")
+
+        fun longToRequestBody(value: Long) = stringToRequestBody("$value")
+
+        fun doubleToRequestBody(value: Double) = stringToRequestBody("$value")
 
         fun manufacturerLogoToMultiPartBody(logo: File?) = toMultipartBody(
             logo,
@@ -36,7 +45,11 @@ class ApiUtils {
             "image/jpeg"
         )
 
-        private fun toMultipartBody(file: File?, name: String, mediaType: String): MultipartBody.Part {
+        private fun toMultipartBody(
+            file: File?,
+            name: String,
+            mediaType: String
+        ): MultipartBody.Part {
             return if (file != null) {
                 val requestFile = file.asRequestBody(mediaType.toMediaTypeOrNull())
                 MultipartBody.Part.createFormData(name, file.name, requestFile)

@@ -6,7 +6,6 @@ import com.iwex.mobilepartsshopstaff.data.remote.ApiConstants.Companion.PARTS_MA
 import com.iwex.mobilepartsshopstaff.data.remote.ApiConstants.Companion.PART_TYPES_MAPPING_V1
 import com.iwex.mobilepartsshopstaff.data.remote.ApiConstants.Companion.STAFFS_MAPPING_V1
 import com.iwex.mobilepartsshopstaff.data.remote.dto.order.OrderResponseDto
-import com.iwex.mobilepartsshopstaff.data.remote.dto.part.PartRequestDto
 import com.iwex.mobilepartsshopstaff.data.remote.dto.part.PartResponseDto
 import com.iwex.mobilepartsshopstaff.data.remote.dto.part.device_type.DeviceTypeRequestDto
 import com.iwex.mobilepartsshopstaff.data.remote.dto.part.device_type.DeviceTypeResponseDto
@@ -15,7 +14,6 @@ import com.iwex.mobilepartsshopstaff.data.remote.dto.part.part_type.PartTypeRequ
 import com.iwex.mobilepartsshopstaff.data.remote.dto.part.part_type.PartTypeResponseDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -55,17 +53,12 @@ interface MainApiService {
     @GET("$MANUFACTURERS_MAPPING_V1/{manufacturerId}")
     suspend fun getManufacturer(@Path("manufacturerId") manufacturerId: Long): ManufacturerResponseDto
 
-    /*@Multipart
-    @POST(MANUFACTURERS_MAPPING_V1)
-    fun createManufacturer(
-        @Body request: ManufacturerRequestDto
-    ): ManufacturerResponseDto*/
     @Multipart
     @POST(MANUFACTURERS_MAPPING_V1)
     suspend fun createManufacturer(
         @Part("name") name: RequestBody,
         @Part logo: MultipartBody.Part,
-    ): Call<ManufacturerResponseDto>
+    ): ManufacturerResponseDto
 
     @Multipart
     @PUT("$MANUFACTURERS_MAPPING_V1/{manufacturerId}")
@@ -73,10 +66,10 @@ interface MainApiService {
         @Path("manufacturerId") manufacturerId: Long,
         @Part("name") name: RequestBody,
         @Part logo: MultipartBody.Part,
-    ): Call<ManufacturerResponseDto>
+    ): ManufacturerResponseDto
 
     @DELETE("$MANUFACTURERS_MAPPING_V1/{manufacturerId}")
-    suspend fun deleteManufacturer(@Path("manufacturerId") manufacturerId: Long): Call<Void>
+    suspend fun deleteManufacturer(@Path("manufacturerId") manufacturerId: Long)
 
     // part types
 
@@ -106,11 +99,36 @@ interface MainApiService {
     @GET("$PARTS_MAPPING_V1/{partId}")
     suspend fun getPart(@Path("partId") partId: Long): PartResponseDto
 
+    /*@POST(PARTS_MAPPING_V1)
+    suspend fun createPart(@Body request: PartRequestDto): PartResponseDto*/
+    @Multipart
     @POST(PARTS_MAPPING_V1)
-    suspend fun createPart(@Body request: PartRequestDto): PartResponseDto
+    suspend fun createPart(
+        @Part("price") price: RequestBody,
+        @Part("quantity") quantity: RequestBody,
+        @Part("name") name: RequestBody,
+        @Part("deviceModels") deviceModels: List<@JvmSuppressWildcards RequestBody>,
+        @Part("specifications") specifications: RequestBody,
+        @Part("manufacturerId") manufacturerId: RequestBody,
+        @Part("deviceTypeId") deviceTypeId: RequestBody,
+        @Part("partTypeId") partTypeId: RequestBody,
+        @Part image: MultipartBody.Part
+    ): PartResponseDto
 
+    @Multipart
     @PUT("$PARTS_MAPPING_V1/{partId}")
-    suspend fun updatePart(@Path("partId") partId: Long, @Body request: PartRequestDto): PartResponseDto
+    suspend fun updatePart(
+        @Path("partId") partId: Long,
+        @Part("price") price: RequestBody,
+        @Part("quantity") quantity: RequestBody,
+        @Part("name") name: RequestBody,
+        @Part("deviceModels") deviceModels: List<@JvmSuppressWildcards RequestBody>,
+        @Part("specifications") specifications: RequestBody,
+        @Part("manufacturerId") manufacturerId: RequestBody,
+        @Part("deviceTypeId") deviceTypeId: RequestBody,
+        @Part("partTypeId") partTypeId: RequestBody,
+        @Part image: MultipartBody.Part
+    ): PartResponseDto
 
     @DELETE("$PARTS_MAPPING_V1/{partId}")
     suspend fun deletePart(@Path("partId") partId: Long)

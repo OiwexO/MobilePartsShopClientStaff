@@ -1,6 +1,12 @@
 package com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.part
 
 import com.iwex.mobilepartsshopstaff.data.remote.ApiUtils
+import com.iwex.mobilepartsshopstaff.data.remote.ApiUtils.Companion.doubleToRequestBody
+import com.iwex.mobilepartsshopstaff.data.remote.ApiUtils.Companion.intToRequestBody
+import com.iwex.mobilepartsshopstaff.data.remote.ApiUtils.Companion.longToRequestBody
+import com.iwex.mobilepartsshopstaff.data.remote.ApiUtils.Companion.partImageToMultipartBody
+import com.iwex.mobilepartsshopstaff.data.remote.ApiUtils.Companion.stringToRequestBody
+import com.iwex.mobilepartsshopstaff.data.remote.ApiUtils.Companion.stringsToRequestBody
 import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.ResponseRequestMapper
 import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.part.device_type.DeviceTypeMapper
 import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.part.manufacturer.ManufacturerMapper
@@ -19,15 +25,15 @@ class PartMapper @Inject constructor(
 
     override fun toRequestDto(request: PartRequest): PartRequestDto {
         return PartRequestDto(
-            price = request.price,
-            quantity = request.quantity,
-            name = request.name,
-            deviceModels = request.deviceModels,
-            specifications = request.specifications,
-            manufacturerId = request.manufacturerId,
-            deviceTypeId = request.deviceTypeId,
-            partTypeId = request.partTypeId,
-            partImage = ApiUtils.partImageToMultipartBody(request.image)
+            price = doubleToRequestBody(request.price),
+            quantity = intToRequestBody(request.quantity),
+            name = stringToRequestBody(request.name),
+            deviceModels = stringsToRequestBody(request.deviceModels),
+            specifications = stringToRequestBody(request.specifications),
+            manufacturerId = longToRequestBody(request.manufacturerId),
+            deviceTypeId = longToRequestBody(request.deviceTypeId),
+            partTypeId = longToRequestBody(request.partTypeId),
+            partImage = partImageToMultipartBody(request.image)
         )
     }
 
