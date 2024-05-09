@@ -21,6 +21,7 @@ import com.iwex.mobilepartsshopstaff.presentation.viewmodel.management.manufactu
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
+//TODO rewrite error handling and form state check
 @AndroidEntryPoint
 class AddManufacturerFragment : ImagePickerFragment() {
 

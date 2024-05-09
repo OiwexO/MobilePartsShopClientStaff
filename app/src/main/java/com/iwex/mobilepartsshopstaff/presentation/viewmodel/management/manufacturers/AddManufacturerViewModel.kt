@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 import java.io.File
 import javax.inject.Inject
 
+//TODO rewrite error handling and form state check
 @HiltViewModel
 class AddManufacturerViewModel @Inject constructor(
     private val createManufacturerUseCase: CreateManufacturerUseCase,

@@ -17,6 +17,7 @@ import com.bumptech.glide.signature.ObjectKey
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.iwex.mobilepartsshopstaff.R
+import com.iwex.mobilepartsshopstaff.domain.entity.part.Part
 import com.iwex.mobilepartsshopstaff.domain.entity.part.PartRequest
 import com.iwex.mobilepartsshopstaff.domain.entity.part.device_type.DeviceType
 import com.iwex.mobilepartsshopstaff.domain.entity.part.manufacturer.Manufacturer
@@ -69,6 +70,10 @@ class AddPartFragment : ImagePickerFragment() {
         super.onViewCreated(view, savedInstanceState)
         initViews(view)
         setClickListeners()
+        val part = args.part
+        if (part != null) {
+            setPartData(part)
+        }
         observeViewModel()
     }
 
@@ -163,6 +168,18 @@ class AddPartFragment : ImagePickerFragment() {
         )
     }
 
+    private fun setPartData(part: Part) {
+        editTextName.setText(part.name)
+        editTextPrice.setText(part.price.toString())
+        editTextQuantity.setText(part.quantity.toString())
+        val deviceModels = part.deviceModels.joinToString(separator = DEVICE_MODELS_DELIMITER)
+        editTextDeviceModels.setText(deviceModels)
+        editTextSpecifications.setText(part.specifications)
+        Glide.with(requireContext())
+            .load(part.imageUrl)
+            .into(imageViewPartImagePreview)
+    }
+
     override fun onImagePicked(imageFile: File) {
         selectedImageFile = imageFile
         initPartImagePreview(imageFile)
@@ -185,9 +202,9 @@ class AddPartFragment : ImagePickerFragment() {
 
     private fun savePart() {
         clearErrors()
+        val name = editTextName.text.toString().trim()
         val price = editTextPrice.text.toString().toDoubleOrNull() ?: 0.0
         val quantity = editTextQuantity.text.toString().toIntOrNull() ?: 0
-        val name = editTextName.text.toString().trim()
         val deviceModels =
             editTextDeviceModels.text.toString().split(DEVICE_MODELS_DELIMITER).map { it.trim() }
         val specifications = editTextSpecifications.text.toString().trim()
