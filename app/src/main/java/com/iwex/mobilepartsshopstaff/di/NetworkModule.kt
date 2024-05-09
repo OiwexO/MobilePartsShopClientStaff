@@ -3,10 +3,12 @@ package com.iwex.mobilepartsshopstaff.di
 import com.iwex.mobilepartsshopstaff.data.remote.ApiConstants
 import com.iwex.mobilepartsshopstaff.data.remote.AuthenticationApiService
 import com.iwex.mobilepartsshopstaff.data.remote.MainApiService
+import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.authentication.AuthenticationMapper
 import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.part.PartMapper
 import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.part.device_type.DeviceTypeMapper
 import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.part.manufacturer.ManufacturerMapper
 import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.part.part_type.PartTypeMapper
+import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.user.UserMapper
 import com.iwex.mobilepartsshopstaff.data.remote.interceptor.AccessTokenInterceptor
 import dagger.Module
 import dagger.Provides
@@ -72,6 +74,10 @@ object NetworkModule {
     }
 
     @[Provides Singleton]
+    fun provideAuthenticationMapper(userMapper: UserMapper): AuthenticationMapper =
+        AuthenticationMapper(userMapper)
+
+    @[Provides Singleton]
     fun provideDeviceTypeMapper(): DeviceTypeMapper = DeviceTypeMapper()
 
     @[Provides Singleton]
@@ -86,4 +92,7 @@ object NetworkModule {
         deviceTypeMapper: DeviceTypeMapper,
         partTypeMapper: PartTypeMapper,
     ): PartMapper = PartMapper(manufacturerMapper, deviceTypeMapper, partTypeMapper)
+
+    @[Provides Singleton]
+    fun provideUserMapper(): UserMapper = UserMapper()
 }

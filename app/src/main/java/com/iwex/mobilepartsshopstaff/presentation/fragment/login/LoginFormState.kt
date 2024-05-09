@@ -1,4 +1,4 @@
-package com.iwex.mobilepartsshopstaff.presentation.fragment.ui.login
+package com.iwex.mobilepartsshopstaff.presentation.fragment.login
 
 /**
  * Data validation state of the login form.

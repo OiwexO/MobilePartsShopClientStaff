@@ -1,13 +1,13 @@
 package com.iwex.mobilepartsshopstaff.data.remote.interceptor
 
-import com.iwex.mobilepartsshopstaff.domain.repository.authentication.JwtTokenRepository
+import com.iwex.mobilepartsshopstaff.domain.repository.authentication.AuthenticationRepository
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
 
 class AccessTokenInterceptor @Inject constructor(
-    private val tokenRepository: JwtTokenRepository,
+    private val authenticationRepository: AuthenticationRepository,
 ) : Interceptor {
     companion object {
         const val HEADER_AUTHORIZATION = "Authorization"
@@ -15,10 +15,18 @@ class AccessTokenInterceptor @Inject constructor(
     }
     override fun intercept(chain: Interceptor.Chain): Response {
         val token = runBlocking {
-            tokenRepository.getJwt()
+            authenticationRepository.getJwt()
         }
         val request = chain.request().newBuilder()
-        request.addHeader(HEADER_AUTHORIZATION, "$TOKEN_TYPE $token")
+        request.addHeader(HEADER_AUTHORIZATION, "$TOKEN_TYPE ${token.value}")
         return chain.proceed(request.build())
+        //TODO implement logout
+        /*val response = chain.proceed(request.build())
+        if (response.code == HTTP_FORBIDDEN) {
+            runBlocking {
+                authenticationRepository.logout()
+            }
+        }
+        return response*/
     }
 }

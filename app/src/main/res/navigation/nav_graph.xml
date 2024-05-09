@@ -7,13 +7,9 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.iwex.mobilepartsshopstaff.presentation.fragment.LoginFragment"
+        android:name="com.iwex.mobilepartsshopstaff.presentation.fragment.login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/action_loginFragment_to_managementFragment"
-            app:destination="@id/managementFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_login" />
     <fragment
         android:id="@+id/managementFragment"
         android:name="com.iwex.mobilepartsshopstaff.presentation.fragment.management.ManagementFragment"

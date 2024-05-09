@@ -6,6 +6,7 @@ import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.ResponseRequestMappe
 import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.user.UserMapper
 import com.iwex.mobilepartsshopstaff.domain.entity.authentication.AuthenticationRequest
 import com.iwex.mobilepartsshopstaff.domain.entity.authentication.AuthenticationResponse
+import com.iwex.mobilepartsshopstaff.domain.entity.authentication.Jwt
 import javax.inject.Inject
 
 class AuthenticationMapper @Inject constructor(
@@ -16,7 +17,7 @@ class AuthenticationMapper @Inject constructor(
         val user = userMapper.toEntity(dto.user)
         return AuthenticationResponse(
             user = user,
-            jwtToken = dto.jwtToken,
+            jwtToken = Jwt(dto.jwtToken),
         )
     }
 

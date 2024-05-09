@@ -4,5 +4,5 @@ import com.iwex.mobilepartsshopstaff.domain.entity.user.User
 
 data class AuthenticationResponse(
     val user: User,
-    val jwtToken: String,
+    val jwtToken: Jwt,
 )
