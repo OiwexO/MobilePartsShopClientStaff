@@ -27,12 +27,12 @@
         android:entries="@array/theme_options" />
 
     <Button
-        android:id="@+id/btnBack"
+        android:id="@+id/btnSave"
         style="@style/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="32dp"
-        android:text="@string/btn_back" />
+        android:layout_marginTop="16dp"
+        android:text="@string/save" />
 
 </LinearLayout>

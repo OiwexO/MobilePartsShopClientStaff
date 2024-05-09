@@ -53,4 +53,11 @@
     <string name="invalid_part_type">Неправильний тип комплектуючої</string>
     <string name="invalid_part_image">Зображення не обрано</string>
     <string name="saved">Збережено</string>
+    <string name="full_name_placeholder">Повне ім\'я: %s %s</string>
+    <string name="username_placeholder">Логін: %s</string>
+    <string name="user_id_placeholder">ID користувача: %d</string>
+    <string name="authority_placeholder">Роль %s</string>
+    <string name="change_personal_info">Змінити персональні дані</string>
+    <string name="manage_assigned_orders">Управління призначеними замовленнями</string>
+    <string name="generate_report">Згенерувати звіт</string>
 </resources>

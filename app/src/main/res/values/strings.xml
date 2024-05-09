@@ -64,4 +64,13 @@
     <string name="invalid_device_type">Invalid device type</string>
     <string name="invalid_part_type">Invalid part type</string>
     <string name="invalid_part_image">Part image not selected</string>
+    <!-- Strings related to ProfileFragment -->
+    <string name="full_name_placeholder">Full name: %s %s</string>
+    <string name="username_placeholder">Username: %s</string>
+    <string name="user_id_placeholder">User ID: %d</string>
+    <string name="authority_placeholder">Authority: %s</string>
+    <string name="change_personal_info">Change personal info</string>
+    <string name="manage_assigned_orders">Manage assigned orders</string>
+    <string name="generate_report">Generate report</string>
+    <string name="save">Save</string>
 </resources>
