@@ -56,7 +56,9 @@
     <string name="full_name_placeholder">Повне ім\'я: %s %s</string>
     <string name="username_placeholder">Логін: %s</string>
     <string name="user_id_placeholder">ID користувача: %d</string>
-    <string name="authority_placeholder">Роль %s</string>
+    <string name="authority_customer">Роль: Покупець</string>
+    <string name="authority_staff">Роль: Працівник</string>
+    <string name="authority_admin">Роль: Адміністратор</string>
     <string name="change_personal_info">Змінити персональні дані</string>
     <string name="manage_assigned_orders">Управління призначеними замовленнями</string>
     <string name="generate_report">Згенерувати звіт</string>
@@ -65,4 +67,5 @@
     <string name="item_theme_system_default">Системна</string>
     <string name="item_theme_light">Світла</string>
     <string name="item_theme_dark">Темна</string>
+    <string name="logout">Вихід</string>
 </resources>

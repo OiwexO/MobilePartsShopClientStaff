@@ -2,8 +2,6 @@ package com.iwex.mobilepartsshopstaff.presentation.fragment.login
 
 import android.content.Context
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,8 +12,8 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.iwex.mobilepartsshopstaff.R
+import com.iwex.mobilepartsshopstaff.domain.entity.authentication.AuthenticationRequest
 import com.iwex.mobilepartsshopstaff.domain.entity.user.User
 import com.iwex.mobilepartsshopstaff.presentation.OnLoggedInListener
 import com.iwex.mobilepartsshopstaff.presentation.viewmodel.LoginViewModel
@@ -63,19 +61,6 @@ class LoginFragment : Fragment() {
     }
 
     private fun setListeners() {
-        val afterTextChangedListener = object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable) {
-                viewModel.loginDataChanged(
-                    usernameEditText.text.toString(), passwordEditText.text.toString()
-                )
-            }
-        }
-        usernameEditText.addTextChangedListener(afterTextChangedListener)
-        passwordEditText.addTextChangedListener(afterTextChangedListener)
         passwordEditText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 login()
@@ -83,24 +68,21 @@ class LoginFragment : Fragment() {
             false
         }
         loginButton.setOnClickListener {
-            progressBar.visibility = View.VISIBLE
             login()
         }
     }
 
     private fun observeViewModel() {
-        viewModel.loginFormState.observe(viewLifecycleOwner, Observer { loginFormState ->
-            if (loginFormState == null) {
-                return@Observer
+        viewModel.loginFormState.observe(viewLifecycleOwner) { state ->
+            if (!state.isDataValid) {
+                state.usernameError?.let {
+                    usernameEditText.error = getString(it)
+                }
+                state.passwordError?.let {
+                    passwordEditText.error = getString(it)
+                }
             }
-            loginButton.isEnabled = loginFormState.isDataValid
-            loginFormState.usernameError?.let {
-                usernameEditText.error = getString(it)
-            }
-            loginFormState.passwordError?.let {
-                passwordEditText.error = getString(it)
-            }
-        })
+        }
         viewModel.user.observe(viewLifecycleOwner) {
             onLoginSuccessful(it)
         }
@@ -113,21 +95,25 @@ class LoginFragment : Fragment() {
     }
 
     private fun login() {
-        viewModel.login(
-            usernameEditText.text.toString(), passwordEditText.text.toString()
-        )
+        val username = usernameEditText.text.toString()
+        val password = passwordEditText.text.toString()
+        viewModel.login(AuthenticationRequest(username, password))
     }
 
     private fun onLoginSuccessful(user: User) {
         val welcome = getString(R.string.welcome, user.firstname)
-        val appContext = context?.applicationContext ?: return
-        Toast.makeText(appContext, welcome, Toast.LENGTH_LONG).show()
+        showToast(welcome)
         onLoggedInListener.onLoggedIn()
     }
 
     private fun onLoginFailed(errorMessage: String) {
-        val appContext = context?.applicationContext ?: return
-        Toast.makeText(appContext, errorMessage, Toast.LENGTH_LONG).show()
+        showToast(errorMessage)
+    }
+
+    private fun showToast(string: String) {
+        context?.let {
+            Toast.makeText(it, string, Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun switchProgressBarVisibility(isVisible: Boolean) {

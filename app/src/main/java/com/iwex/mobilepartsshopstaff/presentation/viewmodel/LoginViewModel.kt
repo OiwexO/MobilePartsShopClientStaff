@@ -31,36 +31,32 @@ class LoginViewModel @Inject constructor(
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> = _errorMessage
 
-    fun login(username: String, password: String) {
+    fun login(authenticationRequest: AuthenticationRequest) {
         _isLoading.value = true
-        val request = AuthenticationRequest(username, password)
-        viewModelScope.launch {
-            val result = authenticateUserUseCase(request)
-            result.onSuccess {
-                _user.value = it.user
-            }.onFailure {
-                _errorMessage.value = it.message ?: "Login failed"
+        if (validateAuthenticationRequest(authenticationRequest)) {
+            viewModelScope.launch {
+                val result = authenticateUserUseCase(authenticationRequest)
+                result.onSuccess {
+                    _user.value = it.user
+                }.onFailure {
+                    _errorMessage.value = it.message ?: "Login failed"
+                }
             }
         }
         _isLoading.value = false
     }
 
-    fun loginDataChanged(username: String, password: String) {
-        if (!isUserNameValid(username)) {
-            _loginFormState.value = LoginFormState(usernameError = R.string.invalid_username)
-        } else if (!isPasswordValid(password)) {
-            _loginFormState.value = LoginFormState(passwordError = R.string.invalid_password)
-        } else {
-            _loginFormState.value = LoginFormState(isDataValid = true)
-        }
+    private fun validateAuthenticationRequest(request: AuthenticationRequest): Boolean {
+        val usernameError = if (!isUsernameValid(request.username)) R.string.invalid_username else null
+        val passwordError = if (!isPasswordValid(request.password)) R.string.invalid_password else null
+        val isDataValid = usernameError == null && passwordError == null
+        val formState = LoginFormState(usernameError, passwordError, isDataValid)
+        _loginFormState.value = formState
+        return isDataValid
     }
 
-    private fun isUserNameValid(username: String): Boolean {
-        return if (username.contains("@")) {
-            Patterns.EMAIL_ADDRESS.matcher(username).matches()
-        } else {
-            username.isNotBlank()
-        }
+    private fun isUsernameValid(username: String): Boolean {
+        return Patterns.EMAIL_ADDRESS.matcher(username).matches()
     }
 
     private fun isPasswordValid(password: String): Boolean {

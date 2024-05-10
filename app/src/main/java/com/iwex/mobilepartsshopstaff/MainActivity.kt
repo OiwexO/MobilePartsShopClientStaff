@@ -11,11 +11,12 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.iwex.mobilepartsshopstaff.presentation.OnLoggedInListener
+import com.iwex.mobilepartsshopstaff.presentation.OnLoggedOutListener
 import com.iwex.mobilepartsshopstaff.presentation.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), OnLoggedInListener {
+class MainActivity : AppCompatActivity(), OnLoggedInListener, OnLoggedOutListener {
 
     private val viewModel: MainViewModel by viewModels()
 
@@ -76,21 +77,28 @@ class MainActivity : AppCompatActivity(), OnLoggedInListener {
     }
 
     private fun navigateToManagementFragment() {
+        bottomNavigationView.visibility = View.VISIBLE
         navController.popBackStack()
-        setBottomNavigationViewVisible()
         navController.navigate(R.id.managementFragment)
     }
 
     private fun navigateToLoginFragment() {
+        bottomNavigationView.visibility = View.GONE
         navController.popBackStack()
         navController.navigate(R.id.loginFragment)
     }
 
-    private fun setBottomNavigationViewVisible() {
-        bottomNavigationView.visibility = View.VISIBLE
-    }
 
     override fun onLoggedIn() {
         navigateToManagementFragment()
+    }
+
+    override fun onLoggedOut() {
+        bottomNavigationView.visibility = View.GONE
+        navController.popBackStack()
+        navController.popBackStack()
+        navController.popBackStack()
+        navController.popBackStack()
+        navController.navigate(R.id.loginFragment)
     }
 }

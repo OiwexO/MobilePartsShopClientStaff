@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".presentation.fragment.ProfileFragment">
 
     <!-- Avatar -->
     <ImageView
@@ -14,7 +16,6 @@
         android:src="@drawable/placeholder_avatar"
         app:layout_constraintBottom_toTopOf="@+id/textViewUserId"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
@@ -26,7 +27,6 @@
         android:text="@string/user_id_placeholder"
         app:layout_constraintBottom_toTopOf="@+id/textViewUsername"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewAvatar" />
 
@@ -36,7 +36,6 @@
         android:text="@string/username_placeholder"
         app:layout_constraintBottom_toTopOf="@+id/textViewFullName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewUserId" />
 
@@ -46,20 +45,18 @@
         android:text="@string/full_name_placeholder"
         app:layout_constraintBottom_toTopOf="@+id/textViewAuthority"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewUsername" />
 
     <TextView
         android:id="@+id/textViewAuthority"
         style="@style/profile_textview_style"
-        android:text="@string/authority_placeholder"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btnChangePersonalInfo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFullName" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewFullName"
+        tools:text="Role placeholder" />
 
     <!-- Buttons -->
     <Button
@@ -68,7 +65,6 @@
         android:text="@string/change_personal_info"
         app:layout_constraintBottom_toTopOf="@+id/btnManageAssignedOrders"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewAuthority" />
 
@@ -79,7 +75,6 @@
         android:text="@string/manage_assigned_orders"
         app:layout_constraintBottom_toTopOf="@+id/btnGenerateReport"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnChangePersonalInfo" />
 
@@ -88,11 +83,19 @@
         style="@style/button"
         android:enabled="false"
         android:text="@string/generate_report"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnLogout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnManageAssignedOrders" />
+
+    <Button
+        android:id="@+id/btnLogout"
+        style="@style/button"
+        android:text="@string/logout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnGenerateReport" />
 
     <ProgressBar
         android:id="@+id/progressBarProfileFragment"
