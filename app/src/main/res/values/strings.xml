@@ -81,4 +81,17 @@
     <string name="save">Save</string>
     <string name="user_avatar">User\'s avatar</string>
     <string name="logout">Logout</string>
+    <!-- Strings related to item_order -->
+    <string name="open_order">Open order</string>
+    <string name="order_id_placeholder">Order ID: %d</string>
+    <string name="order_customer_id_placeholder">Customer ID: %d</string>
+    <string name="order_status_placeholder">Status: %s</string>
+    <string name="order_price_placeholder">Price: %s</string>
+    <string name="order_date_placeholder">Date: %s</string>
+    <string name="order_address_placeholder">Address: %s</string>
+    <string name="order_status_pending">pending</string>
+    <string name="order_status_processing">processing</string>
+    <string name="order_status_shipping">shipping</string>
+    <string name="order_status_delivered">delivered</string>
+    <string name="order_status_canceled">canceled</string>
 </resources>

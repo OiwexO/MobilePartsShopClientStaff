@@ -4,10 +4,13 @@ import com.iwex.mobilepartsshopstaff.data.remote.ApiConstants
 import com.iwex.mobilepartsshopstaff.data.remote.AuthenticationApiService
 import com.iwex.mobilepartsshopstaff.data.remote.MainApiService
 import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.authentication.AuthenticationMapper
+import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.order.OrderItemMapper
+import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.order.OrderMapper
 import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.part.PartMapper
 import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.part.device_type.DeviceTypeMapper
 import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.part.manufacturer.ManufacturerMapper
 import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.part.part_type.PartTypeMapper
+import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.user.AddressMapper
 import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.user.UserMapper
 import com.iwex.mobilepartsshopstaff.data.remote.interceptor.AccessTokenInterceptor
 import dagger.Module
@@ -95,4 +98,17 @@ object NetworkModule {
 
     @[Provides Singleton]
     fun provideUserMapper(): UserMapper = UserMapper()
+
+    @[Provides Singleton]
+    fun provideOrderItemMapper(partMapper: PartMapper): OrderItemMapper =
+        OrderItemMapper(partMapper)
+
+    @[Provides Singleton]
+    fun provideAddressMapper(): AddressMapper = AddressMapper()
+
+    @[Provides Singleton]
+    fun provideOrderMapper(
+        orderItemMapper: OrderItemMapper,
+        addressMapper: AddressMapper
+    ): OrderMapper = OrderMapper(orderItemMapper, addressMapper)
 }

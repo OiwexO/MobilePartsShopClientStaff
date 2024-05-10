@@ -135,7 +135,7 @@ interface MainApiService {
 
     // staffs
 
-    @GET("$STAFFS_MAPPING_V1/{staffId}/orders")
+    @GET("$STAFFS_MAPPING_V1/orders/{staffId}")
     suspend fun getAssignedOrders(@Path("staffId") staffId: Long): List<OrderResponseDto>
 
     @PUT("$STAFFS_MAPPING_V1/order/{orderId}/status")

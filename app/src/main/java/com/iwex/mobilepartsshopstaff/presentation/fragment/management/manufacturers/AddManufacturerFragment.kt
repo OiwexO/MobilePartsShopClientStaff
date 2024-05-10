@@ -57,25 +57,6 @@ class AddManufacturerFragment : ImagePickerFragment() {
         observeViewModel()
     }
 
-    private fun observeViewModel() {
-        viewModel.addManufacturerFormState.observe(viewLifecycleOwner) { state ->
-            if (!state.isDataValid) {
-                state.nameError?.let { showError(it, editTextManufacturerName) }
-                state.logoError?.let { showError(it) }
-            }
-        }
-        viewModel.onSuccess.observe(viewLifecycleOwner) {
-            Toast.makeText(requireContext(), R.string.saved, Toast.LENGTH_SHORT).show()
-            navigateToManageManufacturersFragment()
-        }
-        viewModel.isLoading.observe(viewLifecycleOwner) {
-            switchProgressBarVisibility(it)
-        }
-        viewModel.errorMessage.observe(viewLifecycleOwner) {
-            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
-        }
-    }
-
     private fun initViews(view: View) {
         editTextManufacturerName = view.findViewById(R.id.editTextManufacturerName)
         btnSelectManufacturerLogo = view.findViewById(R.id.btnSelectManufacturerLogo)
@@ -97,6 +78,17 @@ class AddManufacturerFragment : ImagePickerFragment() {
         }
     }
 
+    private fun saveManufacturer() {
+        val name = editTextManufacturerName.text.toString()
+        val manufacturer = args.manufacturer
+        val manufacturerRequest = ManufacturerRequest(name, selectedImageFile)
+        if (manufacturer != null) {
+            viewModel.updateManufacturer(manufacturer.id, manufacturerRequest)
+        } else {
+            viewModel.createManufacturer(manufacturerRequest)
+        }
+    }
+
     private fun navigateToManageManufacturersFragment() {
         findNavController().navigate(R.id.action_addManufacturerFragment_to_manageManufacturersFragment)
     }
@@ -108,26 +100,22 @@ class AddManufacturerFragment : ImagePickerFragment() {
             .into(imageViewManufacturerLogoPreview)
     }
 
-    override fun onImagePicked(imageFile: File) {
-        selectedImageFile = imageFile
-        initManufacturerLogoPreview(imageFile)
-    }
-
-    private fun initManufacturerLogoPreview(imageFile: File) {
-        Glide.with(requireContext())
-            .load(imageFile)
-            .signature(ObjectKey(imageFile.lastModified()))
-            .into(imageViewManufacturerLogoPreview)
-    }
-
-    private fun saveManufacturer() {
-        val name = editTextManufacturerName.text.toString()
-        val manufacturer = args.manufacturer
-        val manufacturerRequest = ManufacturerRequest(name, selectedImageFile)
-        if (manufacturer != null) {
-            viewModel.updateManufacturer(manufacturer.id, manufacturerRequest)
-        } else {
-            viewModel.createManufacturer(manufacturerRequest)
+    private fun observeViewModel() {
+        viewModel.addManufacturerFormState.observe(viewLifecycleOwner) { state ->
+            if (!state.isDataValid) {
+                state.nameError?.let { showError(it, editTextManufacturerName) }
+                state.logoError?.let { showError(it) }
+            }
+        }
+        viewModel.onSuccess.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), R.string.saved, Toast.LENGTH_SHORT).show()
+            navigateToManageManufacturersFragment()
+        }
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            switchProgressBarVisibility(it)
+        }
+        viewModel.errorMessage.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
         }
     }
 
@@ -141,5 +129,17 @@ class AddManufacturerFragment : ImagePickerFragment() {
 
     private fun switchProgressBarVisibility(isVisible: Boolean) {
         progressBar.visibility = if (isVisible) View.VISIBLE else View.GONE
+    }
+
+    override fun onImagePicked(imageFile: File) {
+        selectedImageFile = imageFile
+        initManufacturerLogoPreview(imageFile)
+    }
+
+    private fun initManufacturerLogoPreview(imageFile: File) {
+        Glide.with(requireContext())
+            .load(imageFile)
+            .signature(ObjectKey(imageFile.lastModified()))
+            .into(imageViewManufacturerLogoPreview)
     }
 }

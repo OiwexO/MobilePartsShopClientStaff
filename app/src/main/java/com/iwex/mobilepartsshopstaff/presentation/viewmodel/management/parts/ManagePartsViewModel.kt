@@ -1,5 +1,6 @@
 package com.iwex.mobilepartsshopstaff.presentation.viewmodel.management.parts
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -33,6 +34,7 @@ class ManagePartsViewModel @Inject constructor(
             result.onSuccess {
                 _parts.value = it
             }.onFailure {
+                Log.d(TAG, it.toString())
                 _errorMessage.value = it.message ?: "Get parts failed"
             }
         }
@@ -46,9 +48,14 @@ class ManagePartsViewModel @Inject constructor(
             result.onSuccess {
                 getAllParts()
             }.onFailure {
+                Log.d(TAG, it.toString())
                 _errorMessage.value = it.message ?: "Delete part failed"
             }
         }
         _isLoading.value = false
+    }
+
+    companion object {
+        private const val TAG = "ManagePartsVm"
     }
 }

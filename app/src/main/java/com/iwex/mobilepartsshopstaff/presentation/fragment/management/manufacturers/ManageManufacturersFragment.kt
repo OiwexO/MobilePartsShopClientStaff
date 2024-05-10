@@ -1,14 +1,13 @@
 package com.iwex.mobilepartsshopstaff.presentation.fragment.management.manufacturers
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -41,24 +40,6 @@ class ManageManufacturersFragment : Fragment() {
         setupRecyclerView()
         setClickListeners()
         observeViewModel()
-    }
-
-    private fun observeViewModel() {
-        viewModel.manufacturers.observe(viewLifecycleOwner) { manufacturers ->
-            manufacturersListAdapter.submitList(manufacturers)
-        }
-        viewModel.isLoading.observe(viewLifecycleOwner) {
-            switchProgressBarVisibility(it)
-        }
-        viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
-            Log.e(TAG, errorMessage)
-            Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
-        }
-        viewModel.getAllManufacturers()
-    }
-
-    private fun switchProgressBarVisibility(isVisible: Boolean) {
-        progressBar.visibility = if (isVisible) View.VISIBLE else View.GONE
     }
 
     private fun initViews(view: View) {
@@ -107,8 +88,20 @@ class ManageManufacturersFragment : Fragment() {
         findNavController().navigate(R.id.action_manageManufacturersFragment_to_managementFragment)
     }
 
-    companion object {
+    private fun observeViewModel() {
+        viewModel.manufacturers.observe(viewLifecycleOwner) {
+            manufacturersListAdapter.submitList(it)
+        }
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            switchProgressBarVisibility(it)
+        }
+        viewModel.errorMessage.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+        }
+        viewModel.getAllManufacturers()
+    }
 
-        private const val TAG = "ManageManufacturersFr"
+    private fun switchProgressBarVisibility(isVisible: Boolean) {
+        progressBar.visibility = if (isVisible) View.VISIBLE else View.GONE
     }
 }

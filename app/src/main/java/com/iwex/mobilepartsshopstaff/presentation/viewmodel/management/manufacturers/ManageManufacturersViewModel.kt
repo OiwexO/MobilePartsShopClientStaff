@@ -1,5 +1,6 @@
 package com.iwex.mobilepartsshopstaff.presentation.viewmodel.management.manufacturers
 
+import android.util.Log
 import com.iwex.mobilepartsshopstaff.domain.use_case.part.manufacturer.DeleteManufacturerUseCase
 import com.iwex.mobilepartsshopstaff.domain.use_case.part.manufacturer.GetAllManufacturersUseCase
 
@@ -34,6 +35,7 @@ class ManageManufacturersViewModel @Inject constructor(
             result.onSuccess {
                 _manufacturers.value = it
             }.onFailure {
+                Log.d(TAG, it.toString())
                 _errorMessage.value = it.message ?: "Get manufacturers failed"
             }
         }
@@ -51,5 +53,10 @@ class ManageManufacturersViewModel @Inject constructor(
             }
         }
         _isLoading.value = false
+    }
+
+    companion object {
+
+        private const val TAG = "ManageManufacturersVm"
     }
 }

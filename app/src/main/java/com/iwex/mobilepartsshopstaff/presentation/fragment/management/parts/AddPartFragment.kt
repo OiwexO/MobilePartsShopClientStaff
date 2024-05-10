@@ -109,6 +109,61 @@ class AddPartFragment : ImagePickerFragment() {
         }
     }
 
+    private fun savePart() {
+        clearErrors()
+        val name = editTextName.text.toString().trim()
+        val price = editTextPrice.text.toString().toDoubleOrNull() ?: 0.0
+        val quantity = editTextQuantity.text.toString().toIntOrNull() ?: 0
+        val deviceModels =
+            editTextDeviceModels.text.toString().split(DEVICE_MODELS_DELIMITER).map { it.trim() }
+        val specifications = editTextSpecifications.text.toString().trim()
+        val manufacturerId = (spinnerManufacturer.selectedItem as? Manufacturer)?.id ?: 0
+        val deviceTypeId = (spinnerDeviceType.selectedItem as? DeviceType)?.id ?: 0
+        val partTypeId = (spinnerPartType.selectedItem as? PartType)?.id ?: 0
+        val image = selectedImageFile
+        val partRequest = PartRequest(
+            price = price,
+            quantity = quantity,
+            name = name,
+            deviceModels = deviceModels,
+            specifications = specifications,
+            manufacturerId = manufacturerId,
+            deviceTypeId = deviceTypeId,
+            partTypeId = partTypeId,
+            image = image
+        )
+        val part = args.part
+        if (part == null) {
+            viewModel.createPart(partRequest)
+        } else {
+            viewModel.updatePart(part.id, partRequest)
+        }
+    }
+
+    private fun clearErrors() {
+        tilName.error = null
+        tilPrice.error = null
+        tilQuantity.error = null
+        tilDeviceModels.error = null
+        tilSpecifications.error = null
+    }
+
+    private fun navigateToManagePartsFragment() {
+        findNavController().navigate(R.id.action_addPartFragment_to_managePartsFragment)
+    }
+
+    private fun setPartData(part: Part) {
+        editTextName.setText(part.name)
+        editTextPrice.setText(part.price.toString())
+        editTextQuantity.setText(part.quantity.toString())
+        val deviceModels = part.deviceModels.joinToString(separator = DEVICE_MODELS_DELIMITER)
+        editTextDeviceModels.setText(deviceModels)
+        editTextSpecifications.setText(part.specifications)
+        Glide.with(requireContext())
+            .load(part.imageUrl)
+            .into(imageViewPartImagePreview)
+    }
+
     private fun observeViewModel() {
         viewModel.deviceTypes.observe(viewLifecycleOwner) {
             setupDeviceTypesSpinner(it)
@@ -165,16 +220,16 @@ class AddPartFragment : ImagePickerFragment() {
         )
     }
 
-    private fun setPartData(part: Part) {
-        editTextName.setText(part.name)
-        editTextPrice.setText(part.price.toString())
-        editTextQuantity.setText(part.quantity.toString())
-        val deviceModels = part.deviceModels.joinToString(separator = DEVICE_MODELS_DELIMITER)
-        editTextDeviceModels.setText(deviceModels)
-        editTextSpecifications.setText(part.specifications)
-        Glide.with(requireContext())
-            .load(part.imageUrl)
-            .into(imageViewPartImagePreview)
+    private fun showError(stringId: Int, textInputLayout: TextInputLayout? = null) {
+        if (textInputLayout == null) {
+            Toast.makeText(requireContext(), stringId, Toast.LENGTH_LONG).show()
+            return
+        }
+        textInputLayout.error = getString(stringId)
+    }
+
+    private fun switchProgressBarVisibility(isVisible: Boolean) {
+        progressBar.visibility = if (isVisible) View.VISIBLE else View.GONE
     }
 
     override fun onImagePicked(imageFile: File) {
@@ -189,64 +244,7 @@ class AddPartFragment : ImagePickerFragment() {
             .into(imageViewPartImagePreview)
     }
 
-    private fun navigateToManagePartsFragment() {
-        findNavController().navigate(R.id.action_addPartFragment_to_managePartsFragment)
-    }
-
-    private fun switchProgressBarVisibility(isVisible: Boolean) {
-        progressBar.visibility = if (isVisible) View.VISIBLE else View.GONE
-    }
-
-    private fun savePart() {
-        clearErrors()
-        val name = editTextName.text.toString().trim()
-        val price = editTextPrice.text.toString().toDoubleOrNull() ?: 0.0
-        val quantity = editTextQuantity.text.toString().toIntOrNull() ?: 0
-        val deviceModels =
-            editTextDeviceModels.text.toString().split(DEVICE_MODELS_DELIMITER).map { it.trim() }
-        val specifications = editTextSpecifications.text.toString().trim()
-        val manufacturerId = (spinnerManufacturer.selectedItem as? Manufacturer)?.id ?: 0
-        val deviceTypeId = (spinnerDeviceType.selectedItem as? DeviceType)?.id ?: 0
-        val partTypeId = (spinnerPartType.selectedItem as? PartType)?.id ?: 0
-        val image = selectedImageFile
-        val partRequest = PartRequest(
-            price = price,
-            quantity = quantity,
-            name = name,
-            deviceModels = deviceModels,
-            specifications = specifications,
-            manufacturerId = manufacturerId,
-            deviceTypeId = deviceTypeId,
-            partTypeId = partTypeId,
-            image = image
-        )
-        val part = args.part
-        if (part == null) {
-            viewModel.createPart(partRequest)
-        } else {
-            viewModel.updatePart(part.id, partRequest)
-        }
-    }
-
-    private fun showError(stringId: Int, textInputLayout: TextInputLayout? = null) {
-        if (textInputLayout == null) {
-            Toast.makeText(requireContext(), stringId, Toast.LENGTH_LONG).show()
-            return
-        }
-        textInputLayout.error = getString(stringId)
-    }
-
-    private fun clearErrors() {
-        tilName.error = null
-        tilPrice.error = null
-        tilQuantity.error = null
-        tilDeviceModels.error = null
-        tilSpecifications.error = null
-    }
-
     companion object {
-
-        private const val TAG = "AddPartFr"
 
         private const val DEVICE_MODELS_DELIMITER = ","
     }

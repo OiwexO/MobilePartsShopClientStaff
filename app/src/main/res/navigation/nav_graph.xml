@@ -56,9 +56,13 @@
         android:label="SettingsFragment" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.iwex.mobilepartsshopstaff.presentation.fragment.ProfileFragment"
+        android:name="com.iwex.mobilepartsshopstaff.presentation.fragment.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_assignedOrdersFragment"
+            app:destination="@id/assignedOrdersFragment" />
+    </fragment>
     <fragment
         android:id="@+id/managePartsFragment"
         android:name="com.iwex.mobilepartsshopstaff.presentation.fragment.management.parts.ManagePartsFragment"
@@ -85,5 +89,14 @@
             app:argType="com.iwex.mobilepartsshopstaff.domain.entity.part.Part"
             app:nullable="true"
             android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/assignedOrdersFragment"
+        android:name="com.iwex.mobilepartsshopstaff.presentation.fragment.profile.orders.AssignedOrdersFragment"
+        android:label="fragment_assigned_orders"
+        tools:layout="@layout/fragment_assigned_orders" >
+        <action
+            android:id="@+id/action_assignedOrdersFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 </navigation>

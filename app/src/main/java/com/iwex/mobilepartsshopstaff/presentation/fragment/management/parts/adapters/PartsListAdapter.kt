@@ -15,8 +15,6 @@ class PartsListAdapter : ListAdapter<Part, PartViewHolder>(PartDiffCallback()) {
 
     var onDeletePartClickListener: ((Part) -> Unit)? = null
 
-    var getLocalizedPriceString: ((Double) -> String)? = null
-
     var isUkrainianLocale = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PartViewHolder {
@@ -36,7 +34,8 @@ class PartsListAdapter : ListAdapter<Part, PartViewHolder>(PartDiffCallback()) {
         holder.textViewManufacturerName.text = item.manufacturer.name
         holder.textViewDeviceType.text =
             if (isUkrainianLocale) item.deviceType.nameUk else item.deviceType.nameEn
-        holder.textViewPrice.text = getLocalizedPriceString?.invoke(item.price)
+        holder.textViewPrice.text =
+            holder.itemView.context.getString(R.string.price_placeholder, item.price)
         holder.btnEditPart.setOnClickListener {
             onEditPartClickListener?.invoke(item)
         }

@@ -11,4 +11,5 @@
     <dimen name="edit_text_padding">16dp</dimen>
     <dimen name="image_view_margin">16dp</dimen>
     <dimen name="profile_avatar_size">100dp</dimen>
+    <dimen name="item_corner_radius">15dp</dimen>
 </resources>

@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.iwex.mobilepartsshopstaff.data.remote.AuthenticationApiService
 import com.iwex.mobilepartsshopstaff.data.remote.MainApiService
 import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.authentication.AuthenticationMapper
+import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.order.OrderMapper
 import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.part.PartMapper
 import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.part.device_type.DeviceTypeMapper
 import com.iwex.mobilepartsshopstaff.data.remote.dto.mapper.part.manufacturer.ManufacturerMapper
@@ -14,11 +15,13 @@ import com.iwex.mobilepartsshopstaff.data.repository.part.DeviceTypeRepositoryIm
 import com.iwex.mobilepartsshopstaff.data.repository.part.ManufacturerRepositoryImpl
 import com.iwex.mobilepartsshopstaff.data.repository.part.PartRepositoryImpl
 import com.iwex.mobilepartsshopstaff.data.repository.part.PartTypeRepositoryImpl
+import com.iwex.mobilepartsshopstaff.data.repository.staff.StaffRepositoryImpl
 import com.iwex.mobilepartsshopstaff.domain.repository.authentication.AuthenticationRepository
 import com.iwex.mobilepartsshopstaff.domain.repository.part.DeviceTypeRepository
 import com.iwex.mobilepartsshopstaff.domain.repository.part.ManufacturerRepository
 import com.iwex.mobilepartsshopstaff.domain.repository.part.PartRepository
 import com.iwex.mobilepartsshopstaff.domain.repository.part.PartTypeRepository
+import com.iwex.mobilepartsshopstaff.domain.repository.staff.StaffRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -67,4 +70,9 @@ object RepositoryModule {
         mapper: PartTypeMapper
     ): PartTypeRepository = PartTypeRepositoryImpl(apiService, mapper)
 
+    @[Provides Singleton]
+    fun provideStaffRepository(
+        apiService: MainApiService,
+        mapper: OrderMapper
+    ): StaffRepository = StaffRepositoryImpl(apiService, mapper)
 }

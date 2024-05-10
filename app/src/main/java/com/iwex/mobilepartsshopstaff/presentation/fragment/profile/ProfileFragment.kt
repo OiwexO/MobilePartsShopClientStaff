@@ -1,4 +1,4 @@
-package com.iwex.mobilepartsshopstaff.presentation.fragment
+package com.iwex.mobilepartsshopstaff.presentation.fragment.profile
 
 import android.content.Context
 import android.os.Bundle
@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.iwex.mobilepartsshopstaff.R
 import com.iwex.mobilepartsshopstaff.domain.entity.user.User
 import com.iwex.mobilepartsshopstaff.domain.entity.user.UserAuthority
@@ -88,6 +89,18 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    private fun navigateToPersonalInfoFragment() {
+
+    }
+
+    private fun navigateToAssignedOrdersFragment() {
+        findNavController().navigate(R.id.assignedOrdersFragment)
+    }
+
+    private fun navigateToGenerateReportFragment() {
+
+    }
+
     private fun observeViewModel() {
         viewModel.user.observe(viewLifecycleOwner) {
             updateUi(it)
@@ -99,18 +112,6 @@ class ProfileFragment : Fragment() {
             progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
         viewModel.getUser()
-    }
-
-    private fun navigateToPersonalInfoFragment() {
-
-    }
-
-    private fun navigateToAssignedOrdersFragment() {
-
-    }
-
-    private fun navigateToGenerateReportFragment() {
-
     }
 
     private fun updateUi(user: User) {
