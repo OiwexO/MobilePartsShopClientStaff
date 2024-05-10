@@ -34,9 +34,8 @@
     <string name="cancel">Cancel</string>
     <string name="select_manufacturer_logo">Select manufacturer\'s logo</string>
     <string name="manufacturer_logo_preview">Manufacturer\'s logo preview</string>
-    <!-- Strings related to AddManufacturerFragmentViewModel -->
-    <string name="error_select_logo">Please select logo first</string>
-    <string name="error_enter_name">Please enter name first</string>
+    <string name="invalid_manufacturer_name">Invalid manufacturer\'s name</string>
+    <string name="invalid_manufacturer_logo">Manufacturer\'s logo not selected</string>
     <!-- Strings related to item_manufacturer -->
     <string name="manufacturer_logo">Manufacturer\'s logo</string>
     <string name="add_manufacturer">Add manufacturer</string>

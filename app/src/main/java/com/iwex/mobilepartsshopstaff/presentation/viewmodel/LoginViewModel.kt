@@ -25,23 +25,24 @@ class LoginViewModel @Inject constructor(
     private val _user = MutableLiveData<User>()
     val user: LiveData<User> = _user
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> = _errorMessage
 
     fun login(username: String, password: String) {
+        _isLoading.value = true
         val request = AuthenticationRequest(username, password)
         viewModelScope.launch {
-            try {
-                val result = authenticateUserUseCase(request)
-                if (result.isSuccess) {
-                    _user.value = result.getOrThrow().user
-                } else {
-                    _errorMessage.value = result.exceptionOrNull()?.message ?: "Unknown error"
-                }
-            } catch (e: Exception) {
-                _errorMessage.value = e.message
+            val result = authenticateUserUseCase(request)
+            result.onSuccess {
+                _user.value = it.user
+            }.onFailure {
+                _errorMessage.value = it.message ?: "Login failed"
             }
         }
+        _isLoading.value = false
     }
 
     fun loginDataChanged(username: String, password: String) {

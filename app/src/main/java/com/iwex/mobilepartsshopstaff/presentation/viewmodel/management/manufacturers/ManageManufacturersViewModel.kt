@@ -28,35 +28,28 @@ class ManageManufacturersViewModel @Inject constructor(
     val errorMessage: LiveData<String> = _errorMessage
 
     fun getAllManufacturers() {
+        _isLoading.value = true
         viewModelScope.launch {
-            _isLoading.value = true
-            try {
-                val result = getAllManufacturersUseCase()
-                if (result.isSuccess) {
-                    _manufacturers.value =
-                        result.getOrThrow()
-                } else {
-                    _errorMessage.value = result.exceptionOrNull()?.message ?: "Unknown error"
-                }
-            } catch (e: Exception) {
-                _errorMessage.value = e.message
+            val result = getAllManufacturersUseCase()
+            result.onSuccess {
+                _manufacturers.value = it
+            }.onFailure {
+                _errorMessage.value = it.message ?: "Get manufacturers failed"
             }
-            _isLoading.value = false
         }
+        _isLoading.value = false
     }
 
     fun deleteManufacturerById(manufacturerId: Long) {
+        _isLoading.value = true
         viewModelScope.launch {
-            try {
-                val result = deleteManufacturerUseCase(manufacturerId)
-                if (result.isSuccess) {
-                    getAllManufacturers()
-                } else {
-                    _errorMessage.value = result.exceptionOrNull()?.message ?: "Delete failed"
-                }
-            } catch (e: Exception) {
-                _errorMessage.value = e.message
+            val result = deleteManufacturerUseCase(manufacturerId)
+            result.onSuccess {
+                getAllManufacturers()
+            }.onFailure {
+                _errorMessage.value = it.message ?: "Delete part failed"
             }
         }
+        _isLoading.value = false
     }
 }

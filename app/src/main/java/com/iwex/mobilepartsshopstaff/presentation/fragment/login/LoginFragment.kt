@@ -16,7 +16,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.iwex.mobilepartsshopstaff.R
-import com.iwex.mobilepartsshopstaff.databinding.FragmentLoginBinding
 import com.iwex.mobilepartsshopstaff.domain.entity.user.User
 import com.iwex.mobilepartsshopstaff.presentation.OnLoggedInListener
 import com.iwex.mobilepartsshopstaff.presentation.viewmodel.LoginViewModel
@@ -27,15 +26,12 @@ class LoginFragment : Fragment() {
 
     private val viewModel: LoginViewModel by viewModels()
 
-    private var _binding: FragmentLoginBinding? = null
-    private val binding get() = _binding!!
-
     private lateinit var onLoggedInListener: OnLoggedInListener
 
     private lateinit var usernameEditText: EditText
     private lateinit var passwordEditText: EditText
     private lateinit var loginButton: Button
-    private lateinit var loadingProgressBar: ProgressBar
+    private lateinit var progressBar: ProgressBar
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -49,23 +45,21 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentLoginBinding.inflate(inflater, container, false)
-        return binding.root
-
+        return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViews()
+        initViews(view)
         setListeners()
         observeViewModel()
     }
 
-    private fun initViews() {
-        usernameEditText = binding.username
-        passwordEditText = binding.password
-        loginButton = binding.login
-        loadingProgressBar = binding.loading
+    private fun initViews(view: View) {
+        usernameEditText = view.findViewById(R.id.editTextUsername)
+        passwordEditText = view.findViewById(R.id.editTextPassword)
+        loginButton = view.findViewById(R.id.btnLogin)
+        progressBar = view.findViewById(R.id.progressBarLoginFragment)
     }
 
     private fun setListeners() {
@@ -89,7 +83,7 @@ class LoginFragment : Fragment() {
             false
         }
         loginButton.setOnClickListener {
-            loadingProgressBar.visibility = View.VISIBLE
+            progressBar.visibility = View.VISIBLE
             login()
         }
     }
@@ -109,6 +103,9 @@ class LoginFragment : Fragment() {
         })
         viewModel.user.observe(viewLifecycleOwner) {
             onLoginSuccessful(it)
+        }
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            switchProgressBarVisibility(it)
         }
         viewModel.errorMessage.observe(viewLifecycleOwner) {
             onLoginFailed(it)
@@ -133,8 +130,7 @@ class LoginFragment : Fragment() {
         Toast.makeText(appContext, errorMessage, Toast.LENGTH_LONG).show()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun switchProgressBarVisibility(isVisible: Boolean) {
+        progressBar.visibility = if (isVisible) View.VISIBLE else View.GONE
     }
 }

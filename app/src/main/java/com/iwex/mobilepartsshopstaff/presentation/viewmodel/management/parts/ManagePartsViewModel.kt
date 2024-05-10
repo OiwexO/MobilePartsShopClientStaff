@@ -27,35 +27,28 @@ class ManagePartsViewModel @Inject constructor(
     val errorMessage: LiveData<String> = _errorMessage
 
     fun getAllParts() {
+        _isLoading.value = true
         viewModelScope.launch {
-            _isLoading.value = true
-            try {
-                val result = getAllPartsUseCase()
-                if (result.isSuccess) {
-                    _parts.value =
-                        result.getOrThrow()
-                } else {
-                    _errorMessage.value = result.exceptionOrNull()?.message ?: "Unknown error"
-                }
-            } catch (e: Exception) {
-                _errorMessage.value = e.message
+            val result = getAllPartsUseCase()
+            result.onSuccess {
+                _parts.value = it
+            }.onFailure {
+                _errorMessage.value = it.message ?: "Get parts failed"
             }
-            _isLoading.value = false
         }
+        _isLoading.value = false
     }
 
     fun deletePartById(partId: Long) {
+        _isLoading.value = true
         viewModelScope.launch {
-            try {
-                val result = deletePartUseCase(partId)
-                if (result.isSuccess) {
-                    getAllParts()
-                } else {
-                    _errorMessage.value = result.exceptionOrNull()?.message ?: "Delete failed"
-                }
-            } catch (e: Exception) {
-                _errorMessage.value = e.message
+            val result = deletePartUseCase(partId)
+            result.onSuccess {
+                getAllParts()
+            }.onFailure {
+                _errorMessage.value = it.message ?: "Delete part failed"
             }
         }
+        _isLoading.value = false
     }
 }

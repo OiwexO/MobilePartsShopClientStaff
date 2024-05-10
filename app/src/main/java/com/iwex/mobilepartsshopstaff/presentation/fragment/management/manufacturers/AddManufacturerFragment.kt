@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.signature.ObjectKey
 import com.iwex.mobilepartsshopstaff.R
 import com.iwex.mobilepartsshopstaff.domain.entity.part.manufacturer.Manufacturer
+import com.iwex.mobilepartsshopstaff.domain.entity.part.manufacturer.ManufacturerRequest
 import com.iwex.mobilepartsshopstaff.presentation.fragment.ImagePickerFragment
 import com.iwex.mobilepartsshopstaff.presentation.viewmodel.management.manufacturers.AddManufacturerViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,17 +58,21 @@ class AddManufacturerFragment : ImagePickerFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.isSuccess.observe(viewLifecycleOwner) { isSuccess ->
-            if (isSuccess) {
-                Toast.makeText(requireContext(), "Saved", Toast.LENGTH_SHORT).show()
-                navigateToManageManufacturersFragment()
+        viewModel.addManufacturerFormState.observe(viewLifecycleOwner) { state ->
+            if (!state.isDataValid) {
+                state.nameError?.let { showError(it, editTextManufacturerName) }
+                state.logoError?.let { showError(it) }
             }
         }
-        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-            switchProgressBarVisibility(isLoading)
+        viewModel.onSuccess.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), R.string.saved, Toast.LENGTH_SHORT).show()
+            navigateToManageManufacturersFragment()
         }
-        viewModel.errorMessage.observe(viewLifecycleOwner) { stringId ->
-            Toast.makeText(requireContext(), stringId, Toast.LENGTH_LONG).show()
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            switchProgressBarVisibility(it)
+        }
+        viewModel.errorMessage.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
         }
     }
 
@@ -118,11 +123,20 @@ class AddManufacturerFragment : ImagePickerFragment() {
     private fun saveManufacturer() {
         val name = editTextManufacturerName.text.toString()
         val manufacturer = args.manufacturer
+        val manufacturerRequest = ManufacturerRequest(name, selectedImageFile)
         if (manufacturer != null) {
-            viewModel.updateManufacturer(manufacturer.id, name, selectedImageFile)
+            viewModel.updateManufacturer(manufacturer.id, manufacturerRequest)
         } else {
-            viewModel.createManufacturer(name, selectedImageFile)
+            viewModel.createManufacturer(manufacturerRequest)
         }
+    }
+
+    private fun showError(stringId: Int, editText: EditText? = null) {
+        if (editText == null) {
+            Toast.makeText(requireContext(), stringId, Toast.LENGTH_LONG).show()
+            return
+        }
+        editText.error = getString(stringId)
     }
 
     private fun switchProgressBarVisibility(isVisible: Boolean) {

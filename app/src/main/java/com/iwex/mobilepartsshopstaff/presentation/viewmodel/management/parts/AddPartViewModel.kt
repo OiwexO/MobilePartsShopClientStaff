@@ -38,16 +38,16 @@ class AddPartViewModel @Inject constructor(
     private val _partTypes = MutableLiveData<List<PartType>>()
     val partTypes: LiveData<List<PartType>> = _partTypes
 
-    private var _addPartFormState = MutableLiveData<AddPartFormState>()
+    private val _addPartFormState = MutableLiveData<AddPartFormState>()
     val addPartFormState: LiveData<AddPartFormState> = _addPartFormState
 
-    private var _isSuccess = MutableLiveData(false)
-    val isSuccess: LiveData<Boolean> = _isSuccess
+    private val _onSuccess = MutableLiveData<Unit>()
+    val onSuccess: LiveData<Unit> = _onSuccess
 
-    private var _isLoading = MutableLiveData(false)
+    private val _isLoading = MutableLiveData(false)
     val isLoading: LiveData<Boolean> = _isLoading
 
-    private var _errorMessage = MutableLiveData<String>()
+    private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> = _errorMessage
 
     fun loadData() {
@@ -57,43 +57,43 @@ class AddPartViewModel @Inject constructor(
     }
 
     fun createPart(partRequest: PartRequest) {
+        _isLoading.value = true
         if (validatePartRequest(partRequest = partRequest, isNewPart = true)) {
             viewModelScope.launch {
-                _isLoading.value = true
                 val result = createPartUseCase(partRequest)
                 result.onSuccess {
-                    _isSuccess.value = true
+                    _onSuccess.value = Unit
                 }.onFailure {
                     _errorMessage.value = it.message ?: "Create part failed"
                     Log.e(TAG, it.toString())
                 }
             }
-            _isLoading.value = false
         }
+        _isLoading.value = false
     }
 
     fun updatePart(partId: Long, partRequest: PartRequest) {
+        _isLoading.value = true
         if (validatePartRequest(partRequest = partRequest, isNewPart = false)) {
             viewModelScope.launch {
-                _isLoading.value = true
                 val result = updatePartUseCase(partId, partRequest)
                 result.onSuccess {
-                    _isSuccess.value = true
+                    _onSuccess.value = Unit
                 }.onFailure {
                     _errorMessage.value = it.message ?: "Update part failed"
                     Log.e(TAG, it.toString())
                 }
             }
-            _isLoading.value = false
         }
+        _isLoading.value = false
     }
 
     private fun validatePartRequest(partRequest: PartRequest, isNewPart: Boolean): Boolean {
         val priceError = if (partRequest.price <= 0.0) R.string.invalid_price else null
         val quantityError = if (partRequest.quantity <= 0) R.string.invalid_quantity else null
-        val nameError = if (partRequest.name.isEmpty()) R.string.invalid_part_name else null
+        val nameError = if (partRequest.name.isBlank()) R.string.invalid_part_name else null
         val specificationsError =
-            if (partRequest.specifications.isEmpty()) R.string.invalid_specifications else null
+            if (partRequest.specifications.isBlank()) R.string.invalid_specifications else null
         val manufacturerError =
             if (partRequest.manufacturerId <= 0) R.string.invalid_manufacturer else null
         val deviceTypeError =
@@ -125,60 +125,46 @@ class AddPartViewModel @Inject constructor(
     }
 
     private fun getAllDeviceTypes() {
+        _isLoading.value = true
         viewModelScope.launch {
-            _isLoading.value = true
-            try {
-                val result = getAllDeviceTypesUseCase()
-                if (result.isSuccess) {
-                    _deviceTypes.value =
-                        result.getOrThrow()
-                } else {
-                    _errorMessage.value = result.exceptionOrNull()?.message ?: "Unknown error"
-                }
-            } catch (e: Exception) {
-                _errorMessage.value = e.message
+            val result = getAllDeviceTypesUseCase()
+            result.onSuccess {
+                _deviceTypes.value = it
+            }.onFailure {
+                _errorMessage.value = it.message ?: "Get device types failed"
             }
-            _isLoading.value = false
         }
+        _isLoading.value = false
     }
 
     private fun getAllManufacturers() {
+        _isLoading.value = true
         viewModelScope.launch {
-            _isLoading.value = true
-            try {
-                val result = getAllManufacturersUseCase()
-                if (result.isSuccess) {
-                    _manufacturers.value =
-                        result.getOrThrow()
-                } else {
-                    _errorMessage.value = result.exceptionOrNull()?.message ?: "Unknown error"
-                }
-            } catch (e: Exception) {
-                _errorMessage.value = e.message
+            val result = getAllManufacturersUseCase()
+            result.onSuccess {
+                _manufacturers.value = it
+            }.onFailure {
+                _errorMessage.value = it.message ?: "Get manufacturers failed"
             }
-            _isLoading.value = false
         }
+        _isLoading.value = false
     }
 
     private fun getAllPartTypes() {
+        _isLoading.value = true
         viewModelScope.launch {
-            _isLoading.value = true
-            try {
-                val result = getAllPartTypesUseCase()
-                if (result.isSuccess) {
-                    _partTypes.value =
-                        result.getOrThrow()
-                } else {
-                    _errorMessage.value = result.exceptionOrNull()?.message ?: "Unknown error"
-                }
-            } catch (e: Exception) {
-                _errorMessage.value = e.message
+            val result = getAllPartTypesUseCase()
+            result.onSuccess {
+                _partTypes.value = it
+            }.onFailure {
+                _errorMessage.value = it.message ?: "Get part types failed"
             }
-            _isLoading.value = false
         }
+        _isLoading.value = false
     }
 
     companion object {
+
         private const val TAG = "AddManufacturerVM"
     }
 }

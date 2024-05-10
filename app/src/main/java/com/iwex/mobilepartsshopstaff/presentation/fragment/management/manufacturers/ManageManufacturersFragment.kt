@@ -47,8 +47,8 @@ class ManageManufacturersFragment : Fragment() {
         viewModel.manufacturers.observe(viewLifecycleOwner) { manufacturers ->
             manufacturersListAdapter.submitList(manufacturers)
         }
-        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-            switchProgressBarVisibility(isLoading)
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            switchProgressBarVisibility(it)
         }
         viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
             Log.e(TAG, errorMessage)

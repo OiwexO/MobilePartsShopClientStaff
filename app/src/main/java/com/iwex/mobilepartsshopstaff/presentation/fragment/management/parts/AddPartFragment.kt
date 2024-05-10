@@ -60,8 +60,7 @@ class AddPartFragment : ImagePickerFragment() {
     private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_add_part, container, false)
     }
@@ -133,17 +132,15 @@ class AddPartFragment : ImagePickerFragment() {
                 state.imageError?.let { showError(it) }
             }
         }
-        viewModel.isSuccess.observe(viewLifecycleOwner) { isSuccess ->
-            if (isSuccess) {
-                Toast.makeText(requireContext(), R.string.saved, Toast.LENGTH_SHORT).show()
-                navigateToManagePartsFragment()
-            }
+        viewModel.onSuccess.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), R.string.saved, Toast.LENGTH_SHORT).show()
+            navigateToManagePartsFragment()
         }
-        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-            switchProgressBarVisibility(isLoading)
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            switchProgressBarVisibility(it)
         }
-        viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
-            Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+        viewModel.errorMessage.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
         }
         viewModel.loadData()
     }
