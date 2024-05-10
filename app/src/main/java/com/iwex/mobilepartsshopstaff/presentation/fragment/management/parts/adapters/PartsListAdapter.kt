@@ -35,7 +35,7 @@ class PartsListAdapter : ListAdapter<Part, PartViewHolder>(PartDiffCallback()) {
         holder.textViewDeviceType.text =
             if (isUkrainianLocale) item.deviceType.nameUk else item.deviceType.nameEn
         holder.textViewPrice.text =
-            holder.itemView.context.getString(R.string.price_placeholder, item.price)
+            holder.itemView.context.getString(R.string.price_placeholder, item.price.toString())
         holder.btnEditPart.setOnClickListener {
             onEditPartClickListener?.invoke(item)
         }
