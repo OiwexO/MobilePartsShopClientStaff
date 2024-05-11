@@ -16,7 +16,7 @@ import com.iwex.mobilepartsshopstaff.R
 import com.iwex.mobilepartsshopstaff.domain.entity.authentication.AuthenticationRequest
 import com.iwex.mobilepartsshopstaff.domain.entity.user.User
 import com.iwex.mobilepartsshopstaff.presentation.OnLoggedInListener
-import com.iwex.mobilepartsshopstaff.presentation.viewmodel.LoginViewModel
+import com.iwex.mobilepartsshopstaff.presentation.viewmodel.login.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

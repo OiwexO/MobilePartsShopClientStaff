@@ -17,7 +17,7 @@ import com.iwex.mobilepartsshopstaff.R
 import com.iwex.mobilepartsshopstaff.domain.entity.user.User
 import com.iwex.mobilepartsshopstaff.domain.entity.user.UserAuthority
 import com.iwex.mobilepartsshopstaff.presentation.OnLoggedOutListener
-import com.iwex.mobilepartsshopstaff.presentation.viewmodel.ProfileViewModel
+import com.iwex.mobilepartsshopstaff.presentation.viewmodel.profile.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

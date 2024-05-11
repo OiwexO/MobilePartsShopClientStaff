@@ -21,7 +21,23 @@ class StaffRepositoryImpl @Inject constructor(
         return Result.success(entities)
     }
 
+    override suspend fun getOrderById(orderId: Long): Result<Order> {
+        val response = try {
+            apiService.getOrderById(orderId)
+        } catch (e: Exception) {
+            return Result.failure(e)
+        }
+        val entity = mapper.toEntity(response)
+        return Result.success(entity)
+    }
+
     override suspend fun updateOrderStatus(orderId: Long): Result<Order> {
-        TODO("Not yet implemented")
+        val response = try {
+            apiService.updateOrderStatus(orderId)
+        } catch (e: Exception) {
+            return Result.failure(e)
+        }
+        val entity = mapper.toEntity(response)
+        return Result.success(entity)
     }
 }

@@ -1,4 +1,4 @@
-package com.iwex.mobilepartsshopstaff.presentation.fragment.profile
+package com.iwex.mobilepartsshopstaff.presentation.viewmodel.profile.orders.assigned
 
 import android.util.Log
 import androidx.lifecycle.LiveData

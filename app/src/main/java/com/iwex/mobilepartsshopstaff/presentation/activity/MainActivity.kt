@@ -1,4 +1,4 @@
-package com.iwex.mobilepartsshopstaff
+package com.iwex.mobilepartsshopstaff.presentation.activity
 
 import android.os.Bundle
 import android.view.View
@@ -10,6 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.iwex.mobilepartsshopstaff.R
 import com.iwex.mobilepartsshopstaff.presentation.OnLoggedInListener
 import com.iwex.mobilepartsshopstaff.presentation.OnLoggedOutListener
 import com.iwex.mobilepartsshopstaff.presentation.viewmodel.MainViewModel

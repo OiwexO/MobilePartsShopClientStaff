@@ -1,4 +1,4 @@
-package com.iwex.mobilepartsshopstaff.presentation.fragment.profile.orders
+package com.iwex.mobilepartsshopstaff.presentation.fragment.profile.orders.assigned
 
 import androidx.recyclerview.widget.DiffUtil
 import com.iwex.mobilepartsshopstaff.domain.entity.order.Order

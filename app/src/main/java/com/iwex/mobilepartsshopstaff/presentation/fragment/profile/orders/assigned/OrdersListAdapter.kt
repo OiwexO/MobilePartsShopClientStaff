@@ -1,4 +1,4 @@
-package com.iwex.mobilepartsshopstaff.presentation.fragment.profile.orders
+package com.iwex.mobilepartsshopstaff.presentation.fragment.profile.orders.assigned
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.iwex.mobilepartsshopstaff.R
 import com.iwex.mobilepartsshopstaff.domain.entity.order.Order
 import com.iwex.mobilepartsshopstaff.domain.entity.order.OrderStatus
+import com.iwex.mobilepartsshopstaff.presentation.utils.LocalizationHelper
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -25,14 +26,7 @@ class OrdersListAdapter : ListAdapter<Order, OrderViewHolder>(OrderDiffCallback(
         val item = currentList[position]
         val context = holder.itemView.context
         holder.textViewOrderId.text = context.getString(R.string.order_id_placeholder, item.id)
-        @StringRes val status = when (item.status) {
-            OrderStatus.PENDING -> R.string.order_status_pending
-            OrderStatus.PROCESSING -> R.string.order_status_processing
-            OrderStatus.SHIPPING -> R.string.order_status_shipping
-            OrderStatus.DELIVERED -> R.string.order_status_delivered
-            OrderStatus.CANCELED -> R.string.order_status_canceled
-        }
-        val statusStr = context.getString(status)
+        val statusStr = LocalizationHelper.getLocalizedOrderStatus(item.status, context)
         holder.textViewOrderStatus.text =
             context.getString(R.string.order_status_placeholder, statusStr)
         val dateStr = dateFormat.format(item.date)
@@ -40,7 +34,7 @@ class OrdersListAdapter : ListAdapter<Order, OrderViewHolder>(OrderDiffCallback(
         holder.textViewOrderCustomerId.text =
             context.getString(R.string.order_customer_id_placeholder, item.customerId)
         holder.textViewOrderPrice.text =
-            context.getString(R.string.order_price_placeholder, item.price.toString())
+            context.getString(R.string.price_placeholder, item.price.toString())
         holder.textViewOrderAddress.text =
             context.getString(R.string.order_address_placeholder, item.shippingAddress.city)
         holder.btnOpenOrder.setOnClickListener {

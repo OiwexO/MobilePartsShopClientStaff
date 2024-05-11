@@ -1,4 +1,4 @@
-package com.iwex.mobilepartsshopstaff.presentation.fragment.profile.orders
+package com.iwex.mobilepartsshopstaff.presentation.fragment.profile.orders.assigned
 
 import android.view.View
 import android.widget.Button

@@ -1,4 +1,4 @@
-package com.iwex.mobilepartsshopstaff.presentation.viewmodel
+package com.iwex.mobilepartsshopstaff.presentation.viewmodel.login
 
 import android.util.Patterns
 import androidx.lifecycle.LiveData
