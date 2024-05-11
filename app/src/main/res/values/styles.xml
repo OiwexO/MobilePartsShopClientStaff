@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_margin">@dimen/button_margin</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/button_padding</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
+    </style>
+
+    <style name="settings_spinner_label">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="settings_spinner">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:padding">@dimen/spinner_padding</item>
+    </style>
+
+    <style name="edit_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/edit_text_margin</item>
+        <item name="android:padding">@dimen/edit_text_padding</item>
+        <item name="android:textSize">@dimen/edit_text_text_size</item>
+    </style>
+
+    <style name="add_part_spinner_label">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="profile_textview_style">
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+</resources>

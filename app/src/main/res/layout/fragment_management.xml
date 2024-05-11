@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    tools:context=".presentation.fragment.management.ManagementFragment">
+
+    <Button
+        android:id="@+id/btnManageManufacturers"
+        style="@style/button"
+        android:text="@string/btn_manage_manufacturers"
+        app:layout_constraintBottom_toTopOf="@+id/btnManageDeviceTypes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/btnManageDeviceTypes"
+        style="@style/button"
+        android:text="@string/btn_manage_device_types"
+        app:layout_constraintBottom_toTopOf="@+id/btnManagePartTypes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnManageManufacturers" />
+
+    <Button
+        android:id="@+id/btnManagePartTypes"
+        style="@style/button"
+        android:text="@string/btn_manage_part_types"
+        app:layout_constraintBottom_toTopOf="@+id/btnManageParts"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnManageDeviceTypes" />
+
+    <Button
+        android:id="@+id/btnManageParts"
+        style="@style/button"
+        android:text="@string/btn_manage_parts"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnManagePartTypes" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

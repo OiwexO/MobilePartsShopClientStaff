@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/labelLanguage"
+        style="@style/settings_spinner_label"
+        android:text="@string/label_language" />
+
+    <Spinner
+        android:id="@+id/spinnerLanguage"
+        style="@style/settings_spinner"
+        android:entries="@array/language_options" />
+
+    <TextView
+        android:id="@+id/labelTheme"
+        style="@style/settings_spinner_label"
+        android:layout_marginTop="16dp"
+        android:text="@string/label_theme" />
+
+    <Spinner
+        android:id="@+id/themeSpinner"
+        style="@style/settings_spinner"
+        android:entries="@array/theme_options" />
+
+    <Button
+        android:id="@+id/btnSave"
+        style="@style/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:text="@string/save" />
+
+</LinearLayout>

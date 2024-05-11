@@ -1,0 +1,15 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="fragment_horizontal_margin">16dp</dimen>
+    <dimen name="fragment_vertical_margin">16dp</dimen>
+    <dimen name="button_text_size">20sp</dimen>
+    <dimen name="button_padding">16dp</dimen>
+    <dimen name="spinner_padding">8dp</dimen>
+    <dimen name="button_margin">16dp</dimen>
+    <dimen name="edit_text_text_size">20sp</dimen>
+    <dimen name="edit_text_margin">16dp</dimen>
+    <dimen name="edit_text_padding">16dp</dimen>
+    <dimen name="image_view_margin">16dp</dimen>
+    <dimen name="profile_avatar_size">100dp</dimen>
+    <dimen name="item_corner_radius">15dp</dimen>
+</resources>

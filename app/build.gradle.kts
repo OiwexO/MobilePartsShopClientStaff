@@ -1,6 +1,10 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("kotlin-parcelize")
+    id ("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -15,6 +19,11 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        /*buildConfigField(
+            "String",
+            "BASE_URL",
+            "\"http://192.168.0.112:8080\""
+        )*/
     }
 
     buildTypes {
@@ -33,6 +42,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+//        buildConfig = true
+    }
 }
 
 dependencies {
@@ -42,7 +55,27 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.annotation)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.hilt.android)
+    implementation (libs.retrofit)
+    implementation (libs.retrofit2.converter.gson)
+    implementation(libs.logging.interceptor)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.glide)
+    implementation(libs.androidx.legacy.support.v4)
+    implementation(libs.androidx.fragment.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    kapt(libs.dagger.hilt.android.compiler)
+
+}
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }

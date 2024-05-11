@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.fragment.profile.ProfileFragment">
+
+    <!-- Avatar -->
+    <ImageView
+        android:id="@+id/imageViewAvatar"
+        android:layout_width="@dimen/profile_avatar_size"
+        android:layout_height="@dimen/profile_avatar_size"
+        android:background="@drawable/circle_background"
+        android:contentDescription="@string/user_avatar"
+        android:src="@drawable/placeholder_avatar"
+        app:layout_constraintBottom_toTopOf="@+id/textViewUserId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <!-- User Info -->
+    <TextView
+        android:id="@+id/textViewUserId"
+        style="@style/profile_textview_style"
+        android:text="@string/user_id_placeholder"
+        app:layout_constraintBottom_toTopOf="@+id/textViewUsername"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewAvatar" />
+
+    <TextView
+        android:id="@+id/textViewUsername"
+        style="@style/profile_textview_style"
+        android:text="@string/username_placeholder"
+        app:layout_constraintBottom_toTopOf="@+id/textViewFullName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUserId" />
+
+    <TextView
+        android:id="@+id/textViewFullName"
+        style="@style/profile_textview_style"
+        android:text="@string/full_name_placeholder"
+        app:layout_constraintBottom_toTopOf="@+id/textViewAuthority"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUsername" />
+
+    <TextView
+        android:id="@+id/textViewAuthority"
+        style="@style/profile_textview_style"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnChangePersonalInfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewFullName"
+        tools:text="Role placeholder" />
+
+    <!-- Buttons -->
+    <Button
+        android:id="@+id/btnChangePersonalInfo"
+        style="@style/button"
+        android:text="@string/change_personal_info"
+        app:layout_constraintBottom_toTopOf="@+id/btnManageAssignedOrders"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAuthority" />
+
+    <Button
+        android:id="@+id/btnManageAssignedOrders"
+        style="@style/button"
+        android:enabled="false"
+        android:text="@string/manage_assigned_orders"
+        app:layout_constraintBottom_toTopOf="@+id/btnGenerateReport"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnChangePersonalInfo" />
+
+    <Button
+        android:id="@+id/btnGenerateReport"
+        style="@style/button"
+        android:enabled="false"
+        android:text="@string/generate_report"
+        app:layout_constraintBottom_toTopOf="@id/btnLogout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnManageAssignedOrders" />
+
+    <Button
+        android:id="@+id/btnLogout"
+        style="@style/button"
+        android:text="@string/logout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnGenerateReport" />
+
+    <ProgressBar
+        android:id="@+id/progressBarProfileFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
