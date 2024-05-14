@@ -2,11 +2,9 @@ package com.iwex.mobilepartsshopstaff.presentation.fragment.profile.orders.assig
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.StringRes
 import androidx.recyclerview.widget.ListAdapter
 import com.iwex.mobilepartsshopstaff.R
 import com.iwex.mobilepartsshopstaff.domain.entity.order.Order
-import com.iwex.mobilepartsshopstaff.domain.entity.order.OrderStatus
 import com.iwex.mobilepartsshopstaff.presentation.utils.LocalizationHelper
 import java.text.SimpleDateFormat
 import java.util.Locale

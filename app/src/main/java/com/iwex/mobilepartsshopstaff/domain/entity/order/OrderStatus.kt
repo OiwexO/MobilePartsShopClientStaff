@@ -5,5 +5,6 @@ enum class OrderStatus {
     PROCESSING,
     SHIPPING,
     DELIVERED,
+    COMPLETED,
     CANCELED,
 }

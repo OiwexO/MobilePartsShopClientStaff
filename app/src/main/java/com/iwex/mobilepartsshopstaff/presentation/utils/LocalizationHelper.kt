@@ -19,14 +19,15 @@ object LocalizationHelper {
     }
 
     fun getLocalizedOrderStatus(status: OrderStatus, context: Context): String {
-        @StringRes val status = when (status) {
+        @StringRes val statusRes = when (status) {
             OrderStatus.PENDING -> R.string.order_status_pending
             OrderStatus.PROCESSING -> R.string.order_status_processing
             OrderStatus.SHIPPING -> R.string.order_status_shipping
             OrderStatus.DELIVERED -> R.string.order_status_delivered
+            OrderStatus.COMPLETED -> R.string.order_status_completed
             OrderStatus.CANCELED -> R.string.order_status_canceled
         }
-        return context.getString(status)
+        return context.getString(statusRes)
     }
 
     fun getLocalizedString(resources: Resources, stringEn: String, stringUk: String): String {

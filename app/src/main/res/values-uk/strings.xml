@@ -82,4 +82,5 @@
     <string name="quantity_placeholder">Кількість: %d</string>
     <string name="update_order_status">Оновити статус замовлення</string>
     <string name="order_full_address_placeholder">Адреса: %s %s, %s, %s, %s %s</string>
+    <string name="order_status_completed">виконано</string>
 </resources>

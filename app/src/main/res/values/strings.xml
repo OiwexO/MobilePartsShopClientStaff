@@ -92,6 +92,7 @@
     <string name="order_status_processing">processing</string>
     <string name="order_status_shipping">shipping</string>
     <string name="order_status_delivered">delivered</string>
+    <string name="order_status_completed">completed</string>
     <string name="order_status_canceled">canceled</string>
     <!-- Strings related to item_order_item -->
     <string name="quantity_placeholder">Quantity: %d</string>
