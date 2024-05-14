@@ -6,5 +6,7 @@ interface StaffRepository {
 
     suspend fun getAssignedOrdersByStaffId(staffId: Long): Result<List<Order>>
 
+    suspend fun getOrderById(orderId: Long): Result<Order>
+
     suspend fun updateOrderStatus(orderId: Long): Result<Order>
 }

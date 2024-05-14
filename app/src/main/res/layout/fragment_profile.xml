@@ -11,7 +11,7 @@
         android:id="@+id/imageViewAvatar"
         android:layout_width="@dimen/profile_avatar_size"
         android:layout_height="@dimen/profile_avatar_size"
-        android:background="@drawable/circle_background"
+        android:background="@drawable/background_circle"
         android:contentDescription="@string/user_avatar"
         android:src="@drawable/placeholder_avatar"
         app:layout_constraintBottom_toTopOf="@+id/textViewUserId"

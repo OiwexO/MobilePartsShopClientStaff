@@ -72,7 +72,6 @@
     <string name="order_id_placeholder">ID замовлення: %d</string>
     <string name="order_customer_id_placeholder">ID користувача: %d</string>
     <string name="order_status_placeholder">Статус: %s</string>
-    <string name="order_price_placeholder">Ціна: %s</string>
     <string name="order_date_placeholder">Дата: %s</string>
     <string name="order_address_placeholder">Адреса: %s</string>
     <string name="order_status_pending">в очікуванні</string>
@@ -80,4 +79,8 @@
     <string name="order_status_shipping">в дорозі</string>
     <string name="order_status_delivered">доставлено</string>
     <string name="order_status_canceled">скасовано</string>
+    <string name="quantity_placeholder">Кількість: %d</string>
+    <string name="update_order_status">Оновити статус замовлення</string>
+    <string name="order_full_address_placeholder">Адреса: %s %s, %s, %s, %s %s</string>
+    <string name="order_status_completed">виконано</string>
 </resources>

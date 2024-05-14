@@ -1,4 +1,4 @@
-package com.iwex.mobilepartsshopstaff.presentation.fragment
+package com.iwex.mobilepartsshopstaff.presentation.fragment.settings
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

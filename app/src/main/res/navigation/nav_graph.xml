@@ -14,7 +14,7 @@
         android:id="@+id/managementFragment"
         android:name="com.iwex.mobilepartsshopstaff.presentation.fragment.management.ManagementFragment"
         android:label="fragment_management"
-        tools:layout="@layout/fragment_management" >
+        tools:layout="@layout/fragment_management">
         <action
             android:id="@+id/action_managementFragment_to_manageManufacturersFragment"
             app:destination="@id/manageManufacturersFragment" />
@@ -26,7 +26,7 @@
         android:id="@+id/manageManufacturersFragment"
         android:name="com.iwex.mobilepartsshopstaff.presentation.fragment.management.manufacturers.ManageManufacturersFragment"
         android:label="fragment_manage_manufacturers"
-        tools:layout="@layout/fragment_manage_manufacturers" >
+        tools:layout="@layout/fragment_manage_manufacturers">
         <action
             android:id="@+id/action_manageManufacturersFragment_to_addManufacturerFragment"
             app:destination="@id/addManufacturerFragment" />
@@ -39,26 +39,26 @@
         android:id="@+id/addManufacturerFragment"
         android:name="com.iwex.mobilepartsshopstaff.presentation.fragment.management.manufacturers.AddManufacturerFragment"
         android:label="fragment_add_manufacturer"
-        tools:layout="@layout/fragment_add_manufacturer" >
+        tools:layout="@layout/fragment_add_manufacturer">
         <action
             android:id="@+id/action_addManufacturerFragment_to_manageManufacturersFragment"
             app:destination="@id/manageManufacturersFragment" />
         <argument
             android:name="manufacturer"
+            android:defaultValue="@null"
             app:argType="com.iwex.mobilepartsshopstaff.domain.entity.part.manufacturer.Manufacturer"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.iwex.mobilepartsshopstaff.presentation.fragment.SettingsFragment"
-        tools:layout="@layout/fragment_settings"
-        android:label="SettingsFragment" />
+        android:name="com.iwex.mobilepartsshopstaff.presentation.fragment.settings.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.iwex.mobilepartsshopstaff.presentation.fragment.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profileFragment_to_assignedOrdersFragment"
             app:destination="@id/assignedOrdersFragment" />
@@ -67,7 +67,7 @@
         android:id="@+id/managePartsFragment"
         android:name="com.iwex.mobilepartsshopstaff.presentation.fragment.management.parts.ManagePartsFragment"
         android:label="fragment_manage_parts"
-        tools:layout="@layout/fragment_manage_parts" >
+        tools:layout="@layout/fragment_manage_parts">
         <action
             android:id="@+id/action_managePartsFragment_to_managementFragment"
             app:destination="@id/managementFragment"
@@ -79,24 +79,39 @@
     <fragment
         android:id="@+id/addPartFragment"
         android:name="com.iwex.mobilepartsshopstaff.presentation.fragment.management.parts.AddPartFragment"
-        tools:layout="@layout/fragment_add_part"
-        android:label="AddPartFragment" >
+        android:label="AddPartFragment"
+        tools:layout="@layout/fragment_add_part">
         <action
             android:id="@+id/action_addPartFragment_to_managePartsFragment"
             app:destination="@id/managePartsFragment" />
         <argument
             android:name="part"
+            android:defaultValue="@null"
             app:argType="com.iwex.mobilepartsshopstaff.domain.entity.part.Part"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/assignedOrdersFragment"
-        android:name="com.iwex.mobilepartsshopstaff.presentation.fragment.profile.orders.AssignedOrdersFragment"
+        android:name="com.iwex.mobilepartsshopstaff.presentation.fragment.profile.orders.assigned.AssignedOrdersFragment"
         android:label="fragment_assigned_orders"
-        tools:layout="@layout/fragment_assigned_orders" >
+        tools:layout="@layout/fragment_assigned_orders">
         <action
             android:id="@+id/action_assignedOrdersFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_assignedOrdersFragment_to_orderDetailsFragment"
+            app:destination="@id/orderDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderDetailsFragment"
+        android:name="com.iwex.mobilepartsshopstaff.presentation.fragment.profile.orders.details.OrderDetailsFragment"
+        android:label="OrderDetailsFragment"
+        tools:layout="@layout/fragment_order_details">
+        <action
+            android:id="@+id/action_orderDetailsFragment_to_assignedOrdersFragment"
+            app:destination="@id/assignedOrdersFragment" />
+        <argument
+            android:name="orderId"
+            app:argType="long" />
     </fragment>
 </navigation>

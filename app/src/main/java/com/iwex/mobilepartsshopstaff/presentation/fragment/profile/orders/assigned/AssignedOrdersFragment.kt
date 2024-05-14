@@ -1,4 +1,4 @@
-package com.iwex.mobilepartsshopstaff.presentation.fragment.profile.orders
+package com.iwex.mobilepartsshopstaff.presentation.fragment.profile.orders.assigned
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,8 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.iwex.mobilepartsshopstaff.R
-import com.iwex.mobilepartsshopstaff.domain.entity.order.Order
-import com.iwex.mobilepartsshopstaff.presentation.fragment.profile.AssignedOrdersViewModel
+import com.iwex.mobilepartsshopstaff.presentation.viewmodel.profile.orders.assigned.AssignedOrdersViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -50,13 +49,15 @@ class AssignedOrdersFragment : Fragment() {
     private fun setupRecyclerView() {
         ordersListAdapter = OrdersListAdapter()
         ordersListAdapter.onOpenOrderClickListener = {
-            navigateToOrderFragment(it)
+            navigateToOrderDetailsFragment(it.id)
         }
         recyclerViewAssignedOrders.adapter = ordersListAdapter
     }
 
-    private fun navigateToOrderFragment(order: Order) {
-
+    private fun navigateToOrderDetailsFragment(orderId: Long) {
+        findNavController().navigate(
+            AssignedOrdersFragmentDirections.actionAssignedOrdersFragmentToOrderDetailsFragment(orderId)
+        )
     }
 
     private fun setClickListeners() {
