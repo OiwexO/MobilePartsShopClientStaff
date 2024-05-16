@@ -10,7 +10,9 @@ class ApiConstants {
 
         private const val STAFF_MAPPING_V1 = "$GLOBAL_MAPPING_V1/staff"
 
-        const val BASE_URL = "http://192.168.0.112:8080"
+//        const val BASE_URL = "http://10.10.10.1:8080" // lv
+//        const val BASE_URL = "http://192.168.0.112:8080" // wifi
+        const val BASE_URL = "http://192.168.43.24:8080" // hotspot
 
         const val AUTHENTICATION_MAPPING_V1 = "$GLOBAL_MAPPING_V1/authentication/authorize/staff-admin"
 
